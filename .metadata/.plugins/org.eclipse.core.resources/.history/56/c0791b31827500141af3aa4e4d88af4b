@@ -1,0 +1,76 @@
+package java_database_project;
+
+import javax.swing.JTabbedPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import java.awt.Color;
+
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JTree;
+
+public class TabbedPanel extends JTabbedPane{
+	
+	private static final long serialVersionUID = 1L;
+	private JTextField textField;
+	private JTextField textField_1;
+
+	public TabbedPanel (){	
+		setSize(800, 800);
+		
+		JPanel data = new JPanel();
+		data.setBackground(Color.LIGHT_GRAY);
+		addTab("Data", null, data, null);
+		data.setLayout(null);
+		
+		JPanel new_scout = new JPanel();
+		new_scout.setBackground(Color.LIGHT_GRAY);
+		new_scout.setForeground(Color.GRAY);
+		addTab("New Scout", null, new_scout, null);
+		
+		JPanel new_troop = new JPanel();
+		new_troop.setBackground(Color.LIGHT_GRAY);
+		addTab("New Troop", null, new_troop, null);
+		new_troop.setLayout(null);
+		
+		JLabel new_troop_information = new JLabel("New Troop Information");
+		new_troop_information.setVerticalAlignment(SwingConstants.TOP);
+		new_troop_information.setBounds(10, 11, 336, 20);
+		new_troop.add(new_troop_information);
+		
+		JLabel lblTroopName = new JLabel("Troop Name:");
+		lblTroopName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTroopName.setBounds(10, 69, 84, 25);
+		new_troop.add(lblTroopName);
+		
+		textField = new JTextField();
+		textField.setBounds(104, 69, 624, 25);
+		new_troop.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblTroopCity = new JLabel("Troop City:");
+		lblTroopCity.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTroopCity.setBounds(20, 135, 77, 14);
+		new_troop.add(lblTroopCity);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(104, 130, 242, 25);
+		new_troop.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblState = new JLabel("State:");
+		lblState.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblState.setBounds(376, 135, 46, 14);
+		new_troop.add(lblState);
+		
+		String[] states = { "MD","DC" };
+		JComboBox<String> comboBox = new JComboBox<String>(states);
+		comboBox.setBounds(432, 132, 92, 20);
+		comboBox.setSelectedIndex(1);
+		new_troop.add(comboBox);
+		
+		
+	}
+}
