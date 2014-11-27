@@ -1,8 +1,6 @@
-CREATE USER 'gscdb' IDENTIFIED BY 'gscdbpasswd';
+DROP SCHEMA IF EXISTS `GSCookieDB`;
 
-CREATE SCHEMA `GSCookieDB` ;
-GRANT ALL PRIVILEGES ON GSCookieDB. * TO 'gscdb';
-FLUSH PRIVILEGES;
+CREATE SCHEMA IF NOT EXISTS `GSCookieDB` DEFAULT CHARACTER SET UTF8;
 
 CREATE  TABLE `GSCookieDB`.`troop` (
   `troop_id` INT NOT NULL AUTO_INCREMENT ,
@@ -24,26 +22,26 @@ CREATE  TABLE `GSCookieDB`.`volunteer` (
    
 CREATE  TABLE `gscookiedb`.`scout` (
   `scout_id` INT NOT NULL AUTO_INCREMENT ,
-  `fname` VARCHAR(255) NULL ,
-  `lname` VARCHAR(255) NULL ,
-  `phone_num` VARCHAR(45) NULL ,
-  `email_address` VARCHAR(255) NULL ,
-  `bdate` DATE NULL ,
-  `enroll_date` DATE NULL ,
-  `parent_fname` VARCHAR(255) NULL ,
-  `parent_lname` VARCHAR(255) NULL ,
-  `st_address` VARCHAR(255) NULL ,
-  `city` VARCHAR(45) NULL ,
-  `state` VARCHAR(45) NULL ,
-  `zip` VARCHAR(10) NULL ,
+  `FIRSTNAME` VARCHAR(255) NULL ,
+  `LASTNAME` VARCHAR(255) NULL ,
+  `PHONE` VARCHAR(45) NULL ,
+  `EMAIL` VARCHAR(255) NULL ,
+  `BIRTHDATE` DATE NULL ,
+  `START_DATE` DATE NULL ,
+  `PARENT_FIRSTNAME` VARCHAR(255) NULL ,
+  `PARENT_LASTNAME` VARCHAR(255) NULL ,
+  `ADDRESS` VARCHAR(255) NULL ,
+  `CITY` VARCHAR(45) NULL ,
+  `STATE` VARCHAR(45) NULL ,
+  `ZIPCODE` VARCHAR(10) NULL ,
   `troop_id` INT NULL ,
   PRIMARY KEY (`scout_id`) );
    
 CREATE  TABLE `gscookiedb`.`product` (
-  `product_id` INT NOT NULL AUTO_INCREMENT ,
-  `product_name` VARCHAR(255) NOT NULL ,
-  `product_description` VARCHAR(512) NULL ,
-  `retail_price` DECIMAL(9,2) NOT NULL ,
+  `PRODUCT_ID` INT NOT NULL AUTO_INCREMENT ,
+  `PRODUCT_NAME` VARCHAR(255) NOT NULL ,
+  `PRODUCT_DESCRIPTION` VARCHAR(512) NULL ,
+  `RETAIL_PRICE` DECIMAL(9,2) NOT NULL ,
   PRIMARY KEY (`product_id`) );
   
 CREATE  TABLE `gscookiedb`.`inventory` (
@@ -89,6 +87,17 @@ CREATE  TABLE `gscookiedb`.`order` (
   `order_id` INT NOT NULL ,
   `quantity` INT NOT NULL ,
   PRIMARY KEY (`product_id`, `order_id`) );
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 ALTER TABLE `gscookiedb`.`troop` 
   ADD CONSTRAINT `cookieman`
@@ -273,8 +282,8 @@ VALUES
 ("Donna","Mortenson","(855) 957-8993"),
 ("Dinah","Plante","(822) 765-2703");
 
-INSERT INTO `gscookiedb`.`scout`(`fname`,`lname`,`phone_num`,`email_address`,`bdate`,`enroll_date`,`parent_fname`,`parent_lname`,`st_address`,
-`city`,`state`,`zip`,`troop_id`)
+INSERT INTO `gscookiedb`.`scout`(`FIRSTNAME`,`LASTNAME`,`PHONE`,`EMAIL`,`BIRTHDATE`,`START_DATE`,`PARENT_FIRSTNAME`,`PARENT_LASTNAME`,`ADDRESS`,
+`CITY`,`STATE`,`ZIPCODE`,`troop_id`)
 VALUES
 ("Velda","Vogt","(822) 599-8043","l2y37rs@lo7j0p13xuv0.com","2003-01-18","2014-09-06","Odessa","Vogt","527 Hillcrest Driveÿ","Burke","VA","22015",1),
 ("Cher","Cookson","(899) 295-3824","oyvm9rl@a4ils6b.com","2002-01-05","2014-08-02","Rima","Cookson","510 Locust Lane","Smithtown","NY","11787",2),

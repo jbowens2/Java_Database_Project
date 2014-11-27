@@ -1,0 +1,121 @@
+package java_database_project;
+
+import javax.swing.JTabbedPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import java.awt.Color;
+
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JTree;
+import java.awt.Label;
+
+public class TabbedPanel extends JTabbedPane{
+	
+	private static final long serialVersionUID = 1L;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+
+	public TabbedPanel (){	
+		setSize(800, 800);
+		
+		JPanel data = new JPanel();
+		data.setBackground(Color.LIGHT_GRAY);
+		addTab("Data", null, data, null);
+		data.setLayout(null);
+		
+		JPanel new_scout = new JPanel();
+		new_scout.setBackground(Color.LIGHT_GRAY);
+		new_scout.setForeground(Color.GRAY);
+		addTab("New Scout", null, new_scout, null);
+		
+		JPanel new_troop = new JPanel();
+		new_troop.setBackground(Color.LIGHT_GRAY);
+		addTab("New Troop", null, new_troop, null);
+		new_troop.setLayout(null);
+		
+		JLabel new_troop_information = new JLabel("New Troop Information");
+		new_troop_information.setVerticalAlignment(SwingConstants.TOP);
+		new_troop_information.setBounds(10, 11, 336, 20);
+		new_troop.add(new_troop_information);
+		
+		JLabel lblTroopName = new JLabel("Troop Name:");
+		lblTroopName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTroopName.setBounds(10, 69, 84, 25);
+		new_troop.add(lblTroopName);
+		
+		textField = new JTextField();
+		textField.setBounds(104, 69, 624, 25);
+		new_troop.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblTroopCity = new JLabel("Troop City:");
+		lblTroopCity.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTroopCity.setBounds(20, 191, 77, 14);
+		new_troop.add(lblTroopCity);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(104, 186, 242, 25);
+		new_troop.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblState = new JLabel("State:");
+		lblState.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblState.setBounds(376, 191, 46, 14);
+		new_troop.add(lblState);
+		
+		String[] states = { "MD","DC" };
+		JComboBox comboBox = new JComboBox(states);
+		comboBox.setBounds(432, 188, 92, 20);
+		comboBox.setSelectedIndex(0);
+		new_troop.add(comboBox);
+		
+		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAddress.setBounds(33, 132, 61, 16);
+		new_troop.add(lblAddress);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(104, 126, 624, 25);
+		new_troop.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JLabel lblZipcode = new JLabel("Zipcode:");
+		lblZipcode.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblZipcode.setBounds(554, 190, 61, 16);
+		new_troop.add(lblZipcode);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(627, 184, 101, 28);
+		new_troop.add(textField_5);
+		textField_5.setColumns(10);
+		/*
+		Label zipcode = new Label("Zipcode:");
+		zipcode.setAlignment(Label.RIGHT);
+		zipcode.setBounds(543, 207, 76, 22);
+		new_troop.add(zipcode);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(625, 201, 103, 25);
+		new_troop.add(textField_2);
+		textField_2.setColumns(10);
+		
+		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAddress.setBounds(36, 138, 58, 14);
+		new_troop.add(lblAddress);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(104, 135, 624, 25);
+		new_troop.add(textField_3);
+		textField_3.setColumns(10);*/
+		
+		
+	}
+}

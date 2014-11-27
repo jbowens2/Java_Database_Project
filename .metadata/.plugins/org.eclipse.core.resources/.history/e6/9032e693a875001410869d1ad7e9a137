@@ -1,0 +1,80 @@
+package java_database_project;
+
+import java.awt.Dimension;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.*;
+import java.util.Properties;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
+
+
+public class Main extends JFrame{
+	public static Connection connection;
+	public static Statement statement;
+	public static PreparedStatement preparedStatement;
+	public static ResultSet result;
+	public Main (){
+		setupFrame(this);
+		makeConnection(this.connection,this.statement,this.preparedStatement,this.result);
+	}
+	
+	
+	public void setupFrame(JFrame frame){
+		TabbedPanel tabbedPanel = new TabbedPanel();
+		tabbedPanel.setBounds(0, 0, 794, 772);
+		frame.getContentPane().add(tabbedPanel);
+		frame.setTitle("Girl's Scout Cookie Tracking System");
+		frame.setSize(new Dimension(800,800));
+		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setVisible(true);
+	}
+	
+	public static void makeConnection(Connection connection, Statement statement, PreparedStatement preparedStatement, ResultSet result){
+		connection = null;
+		statement = null;
+		result = null;
+		preparedStatement = null;
+		Properties databaseCredential = new Properties();
+		FileInputStream in = null;
+		String url, user, password;
+		
+		try{
+			in = new FileInputStream(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"login.properties");
+			databaseCredential.load(in);
+			url = databaseCredential.getProperty("url");
+			user = databaseCredential.getProperty("user");
+			password = databaseCredential.getProperty("password");
+			connection = DriverManager.getConnection(url, user, password);
+
+		}catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e + " Please make sure you have a working internect connection.","Connection Failure!",JOptionPane.WARNING_MESSAGE);
+
+		}
+		catch(IOException i){
+			System.out.println(i);
+		}
+		
+	}
+	
+	public static void closeConnection(Connection connection, Statement statement, PreparedStatement preparedStatement, ResultSet result){
+		try{
+			result.close();
+			statement.close();
+			preparedStatement.close();
+			connection.close();
+		}catch(SQLException e){
+			
+		}
+	}
+
+	public static void main(String[] args) {
+		new Main();
+
+	}
+
+}

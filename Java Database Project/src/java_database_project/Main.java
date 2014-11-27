@@ -1,12 +1,29 @@
 package java_database_project;
 
 import java.awt.Dimension;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.*;
+import java.util.Properties;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import com.mysql.jdbc.Statement;
+
 
 public class Main extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static Connection connection;
+	public static Statement statement;
+	public static java.sql.PreparedStatement preparedStatement;
+	public static ResultSet result;
 	public Main (){
 		setupFrame(this);
+		makeConnection();
+		//closeConnection(this.connection,this.statement,this.preparedStatement,this.result);
 	}
 	
 	
@@ -19,6 +36,52 @@ public class Main extends JFrame{
 		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setVisible(true);
+	}
+	
+	public static void makeConnection(){
+		connection = null;
+		statement = null;
+		result = null;
+		preparedStatement = null;
+		Properties databaseCredential = new Properties();
+		FileInputStream in = null;
+		String url, user, password;
+		
+		try{
+			in = new FileInputStream(System.getProperty("user.home")+File.separator+"Desktop"+File.separator+"login.properties");
+			databaseCredential.load(in);
+			url = databaseCredential.getProperty("url");
+			user = databaseCredential.getProperty("user");
+			password = databaseCredential.getProperty("password");
+			connection = DriverManager.getConnection(url, user, password);
+
+		}catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e + " Please make sure you have a working internect connection.","Connection Failure!",JOptionPane.WARNING_MESSAGE);
+
+		}
+		catch(IOException i){
+			System.out.println(i);
+		}
+		
+	}
+	
+	public static void closeConnection(){
+		try{
+			if(result != null){
+				result.close();
+			}
+			if(statement != null){
+				statement.close();
+			}
+			if(preparedStatement != null){
+				preparedStatement.close();
+			}
+			if(connection!= null){
+				connection.close();
+			}
+		}catch(SQLException e){
+			JOptionPane.showMessageDialog(null, e ,"Error!",JOptionPane.WARNING_MESSAGE);
+		}
 	}
 
 	public static void main(String[] args) {
