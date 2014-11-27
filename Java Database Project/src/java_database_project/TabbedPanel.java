@@ -23,6 +23,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
 import net.proteanit.sql.DbUtils;
+import java.awt.event.ActionListener;
 
 public class TabbedPanel extends JTabbedPane{
 	
@@ -43,6 +44,11 @@ public class TabbedPanel extends JTabbedPane{
 	private final Action action_1 = new SwingAction_1();
 	private JTable ProductTable;
 	private JTable ScoutTable;
+	private JTextArea new_product_description;
+	private JTextField new_volunteer_firstname;
+	private JTextField new_volunteer_lastname;
+	private JTextField new_volunteer_phone;
+	private final Action action_2 = new SwingAction_2();
 
 	public TabbedPanel (){	
 		setSize(800, 800);
@@ -226,6 +232,8 @@ public class TabbedPanel extends JTabbedPane{
 		new_troop_manager_combo.setBounds(126, 77, 224, 27);
 		new_troop.add(new_troop_manager_combo);
 		
+		populateManager(new_troop_manager_combo);
+		
 		JButton save_new_troop = new JButton("Save");
 		save_new_troop.setBounds(611, 258, 117, 29);
 		new_troop.add(save_new_troop);
@@ -264,10 +272,6 @@ public class TabbedPanel extends JTabbedPane{
 		add_product.add(new_product_price);
 		new_product_price.setColumns(10);
 		
-		JTextArea new_product_description = new JTextArea();
-		new_product_description.setBounds(133, 219, 583, 359);
-		add_product.add(new_product_description);
-		
 		JLabel lblEnterADescription = new JLabel("Enter a description for the new product below");
 		lblEnterADescription.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEnterADescription.setBounds(133, 182, 583, 16);
@@ -282,8 +286,80 @@ public class TabbedPanel extends JTabbedPane{
 		save_new_product.setBounds(599, 616, 117, 29);
 		add_product.add(save_new_product);
 		
+		new_product_description = new JTextArea();
+		new_product_description.setBounds(133, 210, 583, 153);
+		add_product.add(new_product_description);
+		new_product_description.setColumns(10);
+		
+		JPanel new_Volunteer = new JPanel();
+		addTab("New Volunteer", null, new_Volunteer, null);
+		new_Volunteer.setLayout(null);
+		
+		JLabel lblNewVolunteerInformation = new JLabel("New Volunteer Information");
+		lblNewVolunteerInformation.setBounds(29, 25, 334, 16);;
+		new_Volunteer.add(lblNewVolunteerInformation);
+		
+		JLabel lbltroop = new JLabel("Phone:");
+		lbltroop.setHorizontalAlignment(SwingConstants.RIGHT);
+		lbltroop.setBounds(53, 81, 61, 16);
+		new_Volunteer.add(lbltroop);;
+		
+		JLabel lblFirstname_1 = new JLabel("Firstname:");
+		lblFirstname_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFirstname_1.setBounds(29, 123, 85, 16);
+		new_Volunteer.add(lblFirstname_1);
+		
+		new_volunteer_firstname = new JTextField();
+		new_volunteer_firstname.setBounds(126, 116, 237, 30);
+		new_Volunteer.add(new_volunteer_firstname);
+		new_volunteer_firstname.setColumns(10);
+		
+		JLabel lblLastname_1 = new JLabel("Lastname:");
+		lblLastname_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLastname_1.setBounds(364, 123, 80, 16);
+		new_Volunteer.add(lblLastname_1);
+		
+		new_volunteer_lastname = new JTextField();
+		new_volunteer_lastname.setBounds(456, 117, 237, 30);
+		new_Volunteer.add(new_volunteer_lastname);
+		new_volunteer_lastname.setColumns(10);
+		
+		new_volunteer_phone = new JTextField();
+		new_volunteer_phone.setBounds(126, 75, 237, 28);
+		new_Volunteer.add(new_volunteer_phone);
+		new_volunteer_phone.setColumns(10);
+		
+		JButton cancel_new_volunteer = new JButton("Cancel");
+		cancel_new_volunteer.setBounds(126, 195, 117, 29);
+		new_Volunteer.add(cancel_new_volunteer);
+		
+		JButton save_new_volunteer = new JButton("Save");
+		save_new_volunteer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		save_new_volunteer.setAction(action_2);
+		save_new_volunteer.setBounds(576, 195, 117, 29);
+		new_Volunteer.add(save_new_volunteer);
+		
 		loadData();	
 	}
+	
+	public void populateManager(JComboBox combo){
+		try{
+			Main.makeConnection();
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM Volunteer");
+			Main.result = Main.preparedStatement.executeQuery();
+			while (Main.result.next()){
+				combo.addItem(Main.result.getString("FIRSTNAME")+ " "+ Main.result.getString("LASTNAME"));
+			}
+			Main.closeConnection();
+			
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, e ,"Error!",JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
 	public void loadData(){
 		Main.makeConnection();
 		try {
@@ -296,7 +372,9 @@ public class TabbedPanel extends JTabbedPane{
 			
 			Main.closeConnection();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e ,"Please make sure you have a connection to your database!",JOptionPane.WARNING_MESSAGE);
+		}catch(Exception general){
+			JOptionPane.showMessageDialog(null, general ,"Error!",JOptionPane.WARNING_MESSAGE);
 		}
 		
 	}
@@ -314,7 +392,7 @@ public class TabbedPanel extends JTabbedPane{
 		 */
 		private static final long serialVersionUID = 1L;
 		public SwingAction() {
-			putValue(NAME, "Save");
+			putValue(NAME, "Save Scout");
 			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
@@ -335,15 +413,41 @@ public class TabbedPanel extends JTabbedPane{
 			try {
 				Main.preparedStatement = Main.connection.prepareStatement("INSERT INTO product (`product_name`,`product_description`,`retail_price`) VALUES (?,?,?)");
 				Main.preparedStatement.setString(1, new_product_name.getText());
-				Main.preparedStatement.setString(2, "HELLO");
+				Main.preparedStatement.setString(2, new_product_description.getText());
 				Main.preparedStatement.setFloat(3, Float.parseFloat(new_product_price.getText()));
 				Main.preparedStatement.executeUpdate();
 				loadData();
 				resetTabs();
+				Main.closeConnection();
 				
 				
 			} catch (Exception e1) {
 				JOptionPane.showMessageDialog(null, e1 ,"Error!",JOptionPane.WARNING_MESSAGE);
+			}
+		}
+	}
+	private class SwingAction_2 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_2() {
+			putValue(NAME, "Save Volunteer");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			Main.makeConnection();
+			try{
+				Main.preparedStatement = Main.connection.prepareStatement("INSERT INTO volunteer (`FIRSTNAME`, `LASTNAME`,`PHONE`) values(?,?,?)");
+				Main.preparedStatement.setString(1, new_volunteer_firstname.getText());
+				Main.preparedStatement.setString(2, new_volunteer_lastname.getText());
+				Main.preparedStatement.setString(3, new_volunteer_phone.getText());
+				Main.preparedStatement.execute();
+				loadData();
+				resetTabs();
+				Main.closeConnection();
+			}catch(Exception e2){
+				JOptionPane.showMessageDialog(null, e2 ,"Error!",JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}

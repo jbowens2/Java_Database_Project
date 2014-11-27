@@ -2,26 +2,25 @@ DROP SCHEMA IF EXISTS `GSCookieDB`;
 
 CREATE SCHEMA IF NOT EXISTS `GSCookieDB` DEFAULT CHARACTER SET UTF8;
 
-CREATE  TABLE `GSCookieDB`.`troop` (
-  `troop_id` INT NOT NULL AUTO_INCREMENT ,
-  `troop_number` VARCHAR(45) NULL ,
-  `city` VARCHAR(255) NULL ,
-  `state` VARCHAR(45) NULL ,
-  `cookie_manager_id` INT NULL ,
-  PRIMARY KEY (`troop_id`) ,
-  UNIQUE INDEX `troop_number_UNIQUE` (`troop_number` ASC) );
+CREATE  TABLE `GSCookieDB`.`TROOP` (
+  `TROOP_ID` INT NOT NULL AUTO_INCREMENT ,
+  `ADDRESS` VARCHAR(255) NOT NULL,
+  `CITY` VARCHAR(255) NULL ,
+  `STATE` VARCHAR(45) NULL ,
+  `MANAGER` INT NULL ,
+  PRIMARY KEY (`TROOP_ID`));
 
-CREATE  TABLE `GSCookieDB`.`volunteer` (
-  `volunteer_id` INT NOT NULL AUTO_INCREMENT ,
-  `fname` VARCHAR(255) NULL ,
-  `lname` VARCHAR(255) NULL ,
-  `phone_num` VARCHAR(45) NULL ,
-  `troop_id` INT NULL ,
-  `is_leader` INT NULL ,
-  PRIMARY KEY (`volunteer_id`) );
+CREATE  TABLE `GSCookieDB`.`VOLUNTEER` (
+  `VOLUNTEER_ID` INT NOT NULL AUTO_INCREMENT ,
+  `FIRSTNAME` VARCHAR(255) NULL ,
+  `LASTNAME` VARCHAR(255) NULL ,
+  `PHONE` VARCHAR(45) NULL ,
+  `TROOP_ID` INT NULL ,
+  `LEADER` INT NULL ,
+  PRIMARY KEY (`VOLUNTEER_ID`) );
    
-CREATE  TABLE `gscookiedb`.`scout` (
-  `scout_id` INT NOT NULL AUTO_INCREMENT ,
+CREATE  TABLE `gscookiedb`.`SCOUT` (
+  `SCOUT_ID` INT NOT NULL AUTO_INCREMENT ,
   `FIRSTNAME` VARCHAR(255) NULL ,
   `LASTNAME` VARCHAR(255) NULL ,
   `PHONE` VARCHAR(45) NULL ,
@@ -34,59 +33,59 @@ CREATE  TABLE `gscookiedb`.`scout` (
   `CITY` VARCHAR(45) NULL ,
   `STATE` VARCHAR(45) NULL ,
   `ZIPCODE` VARCHAR(10) NULL ,
-  `troop_id` INT NULL ,
-  PRIMARY KEY (`scout_id`) );
+  `TROOP_ID` INT NULL ,
+  PRIMARY KEY (`SCOUT_ID`) );
    
-CREATE  TABLE `gscookiedb`.`product` (
+CREATE  TABLE `gscookiedb`.`PRODUCT` (
   `PRODUCT_ID` INT NOT NULL AUTO_INCREMENT ,
   `PRODUCT_NAME` VARCHAR(255) NOT NULL ,
   `PRODUCT_DESCRIPTION` VARCHAR(512) NULL ,
   `RETAIL_PRICE` DECIMAL(9,2) NOT NULL ,
-  PRIMARY KEY (`product_id`) );
+  PRIMARY KEY (`PRODUCT_ID`) );
   
-CREATE  TABLE `gscookiedb`.`inventory` (
-  `inventory_id` INT NOT NULL AUTO_INCREMENT ,
-  `quantity` INT NOT NULL ,
-  `product_id` INT NOT NULL ,
-  `troop_id` INT NOT NULL ,
-  `shipment_id` INT NULL ,
-  PRIMARY KEY (`inventory_id`) );
+CREATE  TABLE `gscookiedb`.`INVENTORY` (
+  `INVENTORY_ID` INT NOT NULL AUTO_INCREMENT ,
+  `QUANTITY` INT NOT NULL ,
+  `PRODUCT_ID` INT NOT NULL ,
+  `TROOP_ID` INT NOT NULL ,
+  `SHIPMENT_ID` INT NULL ,
+  PRIMARY KEY (`INVENTORY_ID`) );
   
-CREATE  TABLE `gscookiedb`.`shipment` (
-  `shipment_id` INT NOT NULL AUTO_INCREMENT ,
-  `ship_date` DATE NOT NULL ,
-  `scout_id` INT NOT NULL ,
-  `reciwved` INT ,
-  PRIMARY KEY (`shipment_id`) );
+CREATE  TABLE `gscookiedb`.`SHIPMENT` (
+  `SHIPMENT_ID` INT NOT NULL AUTO_INCREMENT ,
+  `DATE` DATE NOT NULL ,
+  `SCOUT_ID` INT NOT NULL ,
+  `RECEIVED` INT ,
+  PRIMARY KEY (`SHIPMENT_ID`) );
   
-CREATE  TABLE `gscookiedb`.`money` (
-  `transaction_id` INT NOT NULL AUTO_INCREMENT ,
-  `amount` DECIMAL(9,2) NOT NULL ,
-  `tdate` DATE NOT NULL ,
-  `scout_id` INT NOT NULL ,
-  `troop_id` INT NOT NULL ,
-  PRIMARY KEY (`transaction_id`) );
+CREATE  TABLE `gscookiedb`.`MONEY` (
+  `TRANSACTION_ID` INT NOT NULL AUTO_INCREMENT ,
+  `AMOUNT` DECIMAL(9,2) NOT NULL ,
+  `DATE` DATE NOT NULL ,
+  `SCOUT_ID` INT NOT NULL ,
+  `TROOP_ID` INT NOT NULL ,
+  PRIMARY KEY (`TRANSACTION_ID`) );
 
-  CREATE  TABLE `gscookiedb`.`customer` (
-  `customer_id` INT NOT NULL AUTO_INCREMENT ,
-  `fname` VARCHAR(255) NULL ,
-  `lname` VARCHAR(255) NULL ,
-  `phone_num` VARCHAR(45) NULL ,
-  PRIMARY KEY (`customer_id`) );
+  CREATE  TABLE `gscookiedb`.`CUSTOMER` (
+  `CUSTOMER_ID` INT NOT NULL AUTO_INCREMENT ,
+  `FIRSTNAME` VARCHAR(255) NULL ,
+  `LASTNAME` VARCHAR(255) NULL ,
+  `PHONE` VARCHAR(45) NULL ,
+  PRIMARY KEY (`CUSTOMER_ID`) );
 
-CREATE  TABLE `gscookiedb`.`order` (
-  `order_id` INT NOT NULL AUTO_INCREMENT ,
-  `odate` DATE NOT NULL ,
-  `scout_id` INT NOT NULL ,
-  `customer_id` INT NOT NULL ,
-  `is_paid` INT NULL ,
-  PRIMARY KEY (`order_id`) );
+CREATE  TABLE `gscookiedb`.`ORDER` (
+  `ORDER_ID` INT NOT NULL AUTO_INCREMENT ,
+  `DATE` DATE NOT NULL ,
+  `SCOUT_ID` INT NOT NULL ,
+  `CUSTOMER_ID` INT NOT NULL ,
+  `STATUS` INT NULL ,
+  PRIMARY KEY (`ORDER_ID`) );
 
- CREATE  TABLE `gscookiedb`.`product_order` (
-  `product_id` INT NOT NULL ,
-  `order_id` INT NOT NULL ,
-  `quantity` INT NOT NULL ,
-  PRIMARY KEY (`product_id`, `order_id`) );
+ CREATE  TABLE `gscookiedb`.`PRODUCT_ORDER` (
+  `PRODUCT_ID` INT NOT NULL ,
+  `ORDER_ID` INT NOT NULL ,
+  `QUANTITY` INT NOT NULL ,
+  PRIMARY KEY (`PRODUCT_ID`, `ORDER_ID`) );
   
   
   
@@ -97,7 +96,7 @@ CREATE  TABLE `gscookiedb`.`order` (
   
   
   
-  
+/*  
   
 ALTER TABLE `gscookiedb`.`troop` 
   ADD CONSTRAINT `cookieman`
@@ -192,6 +191,8 @@ ALTER TABLE `gscookiedb`.`order`
   ON UPDATE NO ACTION
 , ADD INDEX `oscout_idx` (`scout_id` ASC) 
 , ADD INDEX `ocustomer_idx` (`customer_id` ASC) ;
+
+
 
 INSERT INTO `gscookiedb`.`product` (`product_name`,`product_description`,`retail_price`)
 VALUES
@@ -344,4 +345,4 @@ VALUES
 (236,10,3,null),
 (475,11,3,null),
 (474,12,3,null);
-
+*/
