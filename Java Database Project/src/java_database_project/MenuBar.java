@@ -17,6 +17,9 @@ public class MenuBar extends JMenuBar{
 	private final Action action_1 = new SwingAction_1();
 	private final Action action_2 = new SwingAction_2();
 	private final Action action_3 = new SwingAction_3();
+	private final Action action_4 = new SwingAction_4();
+	private final Action action_5 = new SwingAction_5();
+	private final Action action_6 = new SwingAction_6();
 	
 	public MenuBar(){
 		JMenu file = new JMenu("File");
@@ -34,16 +37,21 @@ public class MenuBar extends JMenuBar{
 		JMenuItem newTroop = new JMenuItem("Troop");
 		newTroop.setAction(action_2);
 		JMenuItem newProduct = new JMenuItem("Product");
+		newProduct.setAction(action_4);
 		JMenuItem newVolunteer = new JMenuItem("Volunteer");
 		newVolunteer.setAction(action_1);
 		JMenuItem newCustomer = new JMenuItem("Customer");
+		newCustomer.setAction(action_5);
 		JMenuItem newShipment = new JMenuItem("Shipment");
+		JMenuItem newOrder = new JMenuItem("Order");
+		newOrder.setAction(action_6);
 		New.add(newScout);
 		New.add(newTroop);
 		New.add(newProduct);
 		New.add(newVolunteer);
 		New.add(newCustomer);
 		New.add(newShipment);
+		New.add(newOrder);
 		file.add(New);
 		
 		//
@@ -110,6 +118,45 @@ public class MenuBar extends JMenuBar{
 		}
 		public void actionPerformed(ActionEvent e) {
 			new QueryWindow();
+		}
+	}
+	private class SwingAction_4 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_4() {
+			putValue(NAME, "Product");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewProduct();
+		}
+	}
+	private class SwingAction_5 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_5() {
+			putValue(NAME, "Customer");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewCustomer();
+		}
+	}
+	private class SwingAction_6 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_6() {
+			putValue(NAME, "Order");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewOrder();
 		}
 	}
 }

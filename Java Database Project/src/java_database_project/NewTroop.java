@@ -39,6 +39,7 @@ public class NewTroop extends JFrame{
 	private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
+	private JTextField name;
 
 	public NewTroop(){
 		//custom variables
@@ -55,63 +56,73 @@ public class NewTroop extends JFrame{
 		
 		JLabel lblTroop = new JLabel("Manager:");
 		lblTroop.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblTroop.setBounds(30, 37, 61, 16);
+		lblTroop.setBounds(30, 25, 61, 16);
 		new_troop_panel.add(lblTroop);
 		
 		manager = new JComboBox();
-		manager.setBounds(103, 33, 134, 27);
+		manager.setBounds(103, 21, 134, 27);
 		new_troop_panel.add(manager);
 		
 		populateManager(manager);
 		
 		JLabel lblAddress = new JLabel("Address:");
 		lblAddress.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblAddress.setBounds(30, 78, 61, 16);
+		lblAddress.setBounds(30, 106, 61, 16);
 		new_troop_panel.add(lblAddress);
 		
 		address = new JTextField();
-		address.setBounds(103, 72, 367, 28);
+		address.setBounds(103, 100, 367, 28);
 		new_troop_panel.add(address);
 		address.setColumns(10);
 		
 		city = new JTextField();
-		city.setBounds(103, 112, 97, 28);
+		city.setBounds(103, 140, 97, 28);
 		new_troop_panel.add(city);
 		city.setColumns(10);
 		
 		JLabel lblCity = new JLabel("City:");
 		lblCity.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCity.setBounds(30, 118, 61, 16);
+		lblCity.setBounds(30, 146, 61, 16);
 		new_troop_panel.add(lblCity);
 		
 		JLabel lblState = new JLabel("State:");
 		lblState.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblState.setBounds(212, 118, 35, 16);
+		lblState.setBounds(202, 146, 35, 16);
 		new_troop_panel.add(lblState);
 		
 		zipcode = new JTextField();
-		zipcode.setBounds(400, 112, 70, 28);
+		zipcode.setBounds(400, 140, 70, 28);
 		new_troop_panel.add(zipcode);
 		zipcode.setColumns(10);
 		
 		JLabel lblZipcode = new JLabel("Zipcode:");
 		lblZipcode.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblZipcode.setBounds(327, 118, 61, 16);
+		lblZipcode.setBounds(327, 146, 61, 16);
 		new_troop_panel.add(lblZipcode);
 		
 		JButton cancel = new JButton("Cancel");
 		cancel.setAction(action_1);
-		cancel.setBounds(103, 152, 117, 29);
+		cancel.setBounds(103, 190, 117, 29);
 		new_troop_panel.add(cancel);
 		
 		JButton btnSave = new JButton("Save");
 		btnSave.setAction(action);
-		btnSave.setBounds(353, 152, 117, 29);
+		btnSave.setBounds(353, 190, 117, 29);
 		new_troop_panel.add(btnSave);
 		
 		state_combo = new JComboBox(states);
-		state_combo.setBounds(259, 112, 75, 27);
+		state_combo.setBounds(249, 140, 75, 27);
 		new_troop_panel.add(state_combo);
+		
+		name = new JTextField();
+		name.setBounds(103, 60, 367, 28);
+		new_troop_panel.add(name);
+		name.setColumns(10);
+		
+		JLabel lblTroopName = new JLabel("Troop Name:");
+		lblTroopName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTroopName.setBounds(6, 66, 85, 16);
+		new_troop_panel.add(lblTroopName);
 		this.setVisible(true);
 	}
 	
@@ -133,10 +144,7 @@ public class NewTroop extends JFrame{
 	public void loadData(){
 		Main.makeConnection();
 		try {
-			//Main.preparedStatement = Main.connection.prepareStatement("SELECT PRODUCT_NAME, PRODUCT_DESCRIPTION, RETAIL_PRICE FROM product");
-			//Main.result = Main.preparedStatement.executeQuery();
-			//ProductTable.setModel(DbUtils.resultSetToTableModel(Main.result));
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM TROOP");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT NAME, ADDRESS, CITY, STATE, ZIPCODE, MANAGER, FIRSTNAME, LASTNAME FROM TROOP, VOLUNTEER WHERE TROOP.MANAGER = VOLUNTEER.VOLUNTEER_ID");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.troop_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
@@ -166,15 +174,15 @@ public class NewTroop extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			Main.makeConnection();
 			try{
-				Main.preparedStatement = Main.connection.prepareStatement("INSERT INTO TROOP (`ADDRESS`,`CITY`,`STATE`,`ZIPCODE`,`MANAGER`) values(?,?,?,?,?)");
-				
-				Main.preparedStatement.setString(1, address.getText());
-				Main.preparedStatement.setString(2, city.getText());
+				Main.preparedStatement = Main.connection.prepareStatement("INSERT INTO TROOP (`NAME`,`ADDRESS`,`CITY`,`STATE`,`ZIPCODE`,`MANAGER`) values(?,?,?,?,?,?)");
+				Main.preparedStatement.setString(1, name.getText());
+				Main.preparedStatement.setString(2, address.getText());
+				Main.preparedStatement.setString(3, city.getText());
 				String stateValue = state_combo.getSelectedItem().toString();
-				Main.preparedStatement.setString(3, stateValue);
+				Main.preparedStatement.setString(4, stateValue);
 				String managerValue = manager.getSelectedItem().toString();
-				Main.preparedStatement.setString(4, zipcode.getText());
-				Main.preparedStatement.setString(5, managerValue);
+				Main.preparedStatement.setString(5, zipcode.getText());
+				Main.preparedStatement.setString(6, managerValue);
 				Main.preparedStatement.execute();
 				loadData();
 				//resetTabs();

@@ -77,9 +77,11 @@ public class NewScout extends JFrame{
 		lblTroop.setBounds(30, 37, 61, 16);
 		new_scout_panel.add(lblTroop);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(103, 33, 134, 27);
-		new_scout_panel.add(comboBox);
+		JComboBox Troop_Combo = new JComboBox();
+		Troop_Combo.setBounds(103, 33, 134, 27);
+		new_scout_panel.add(Troop_Combo);
+		
+		populateTroop(Troop_Combo);
 		
 		JLabel lblPhone = new JLabel("Phone:");
 		lblPhone.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -183,13 +185,26 @@ public class NewScout extends JFrame{
 		this.setVisible(true);
 	}
 	
+	public void populateTroop(JComboBox combo){
+		try{
+			Main.makeConnection();
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM TROOP");
+			Main.result = Main.preparedStatement.executeQuery();
+			while (Main.result.next()){
+				combo.addItem(Main.result.getString("TROOP_ID"));
+			}
+			Main.closeConnection();
+			
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, e ,"Error!",JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
 	public void loadData(){
 		Main.makeConnection();
 		try {
-			//Main.preparedStatement = Main.connection.prepareStatement("SELECT PRODUCT_NAME, PRODUCT_DESCRIPTION, RETAIL_PRICE FROM product");
-			//Main.result = Main.preparedStatement.executeQuery();
-			//ProductTable.setModel(DbUtils.resultSetToTableModel(Main.result));
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, PHONE, EMAIL FROM scout");
+			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, PHONE, EMAIL FROM SCOUT");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.scout_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			

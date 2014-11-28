@@ -25,6 +25,8 @@ public class TabbedPanel extends JTabbedPane{
 	public static JTable troop_table;
 	public static JTable customer_table;
 	public static JTable shipment_table;
+	public static JTable product_table;
+	public static JTable order_table;
 
 	public TabbedPanel (){	
 		setSize(800, 800);
@@ -90,6 +92,28 @@ public class TabbedPanel extends JTabbedPane{
 		shipment_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane_4.setViewportView(shipment_table);
 		
+		JPanel product_tab = new JPanel();
+		addTab("Product", null, product_tab, null);
+		product_tab.setLayout(null);
+		
+		JScrollPane scrollPane_5 = new JScrollPane();
+		scrollPane_5.setBounds(0, 0, 800, 800);
+		product_tab.add(scrollPane_5);
+		
+		product_table = new JTable();
+		scrollPane_5.setViewportView(product_table);
+		
+		JPanel order_tab = new JPanel();
+		addTab("Orders", null, order_tab, null);
+		order_tab.setLayout(null);
+		
+		JScrollPane scrollPane_6 = new JScrollPane();
+		scrollPane_6.setBounds(0, 0, 800, 800);
+		order_tab.add(scrollPane_6);
+		
+		order_table = new JTable();
+		scrollPane_6.setViewportView(order_table);
+		
 		
 		loadData();	
 	}
@@ -112,8 +136,9 @@ public class TabbedPanel extends JTabbedPane{
 	public void loadData(){
 		Main.makeConnection();
 		try {
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT PRODUCT_NAME, PRODUCT_DESCRIPTION, RETAIL_PRICE FROM product");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT NAME, DESCRIPTION, PRICE FROM PRODUCT");
 			Main.result = Main.preparedStatement.executeQuery();
+			TabbedPanel.product_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, PHONE, EMAIL FROM scout");
 			Main.result = Main.preparedStatement.executeQuery();
@@ -123,7 +148,7 @@ public class TabbedPanel extends JTabbedPane{
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.volunteer_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM TROOP");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT NAME, ADDRESS, CITY, STATE, ZIPCODE, MANAGER, FIRSTNAME, LASTNAME FROM TROOP, VOLUNTEER WHERE TROOP.MANAGER = VOLUNTEER.VOLUNTEER_ID");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.troop_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
@@ -135,6 +160,10 @@ public class TabbedPanel extends JTabbedPane{
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.shipment_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM PRODUCT_ORDER");
+			Main.result = Main.preparedStatement.executeQuery();
+			TabbedPanel.order_table.setModel(DbUtils.resultSetToTableModel(Main.result));
+			
 			Main.closeConnection();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e ,"Please make sure you have a connection to your database!",JOptionPane.WARNING_MESSAGE);
@@ -143,5 +172,4 @@ public class TabbedPanel extends JTabbedPane{
 		}
 		
 	}
-	
 }
