@@ -1,0 +1,162 @@
+package java_database_project;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+
+public class NewScout extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField firstname;
+	private JTextField lastname;
+	private JTextField phone;
+	private JTextField email;
+	private JTextField birthdate;
+	private JTextField start_date;
+	private JTextField parent;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField zipcode;
+
+	public NewScout(){
+		//custom variables
+		String[] states = {"MD", "DC"};
+		this.setTitle("New Scout Information");
+		this.setSize(new Dimension(500, 400));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		
+		JPanel new_scout_panel = new JPanel();
+		new_scout_panel.setBounds(0, 0, 500, 378);
+		getContentPane().add(new_scout_panel);
+		new_scout_panel.setLayout(null);
+		
+		JLabel lblFirstname = new JLabel("Firstname:");
+		lblFirstname.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFirstname.setBounds(16, 78, 75, 16);
+		new_scout_panel.add(lblFirstname);
+		
+		firstname = new JTextField();
+		firstname.setBounds(103, 72, 134, 28);
+		new_scout_panel.add(firstname);
+		firstname.setColumns(10);
+		
+		JLabel lblLastname = new JLabel("Lastname:");
+		lblLastname.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLastname.setBounds(249, 72, 75, 16);
+		new_scout_panel.add(lblLastname);
+		
+		lastname = new JTextField();
+		lastname.setBounds(336, 66, 134, 28);
+		new_scout_panel.add(lastname);
+		lastname.setColumns(10);
+		
+		JLabel lblTroop = new JLabel("Troop:");
+		lblTroop.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTroop.setBounds(30, 37, 61, 16);
+		new_scout_panel.add(lblTroop);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(103, 33, 134, 27);
+		new_scout_panel.add(comboBox);
+		
+		JLabel lblPhone = new JLabel("Phone:");
+		lblPhone.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPhone.setBounds(30, 118, 61, 16);
+		new_scout_panel.add(lblPhone);
+		
+		phone = new JTextField();
+		phone.setBounds(103, 112, 134, 28);
+		new_scout_panel.add(phone);
+		phone.setColumns(10);
+		
+		email = new JTextField();
+		email.setBounds(336, 106, 134, 28);
+		new_scout_panel.add(email);
+		email.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEmail.setBounds(263, 112, 61, 16);
+		new_scout_panel.add(lblEmail);
+		
+		JLabel lblDate = new JLabel("Date:");
+		lblDate.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblDate.setBounds(30, 158, 61, 16);
+		new_scout_panel.add(lblDate);
+		
+		birthdate = new JTextField();
+		birthdate.setBounds(103, 152, 134, 28);
+		new_scout_panel.add(birthdate);
+		birthdate.setColumns(10);
+		
+		start_date = new JTextField();
+		start_date.setBounds(336, 146, 134, 28);
+		new_scout_panel.add(start_date);
+		start_date.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Start Date:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setBounds(244, 152, 80, 16);
+		new_scout_panel.add(lblNewLabel);
+		
+		JLabel lblParentFirstname = new JLabel("Parent:");
+		lblParentFirstname.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblParentFirstname.setBounds(24, 198, 67, 16);
+		new_scout_panel.add(lblParentFirstname);
+		
+		parent = new JTextField();
+		parent.setBounds(103, 192, 367, 28);
+		new_scout_panel.add(parent);
+		parent.setColumns(10);
+		
+		JLabel lblAddress = new JLabel("Address:");
+		lblAddress.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblAddress.setBounds(30, 238, 61, 16);
+		new_scout_panel.add(lblAddress);
+		
+		textField = new JTextField();
+		textField.setBounds(103, 232, 367, 28);
+		new_scout_panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(103, 272, 97, 28);
+		new_scout_panel.add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblCity = new JLabel("City:");
+		lblCity.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCity.setBounds(30, 278, 61, 16);
+		new_scout_panel.add(lblCity);
+		
+		JComboBox state = new JComboBox();
+		state.setBounds(263, 272, 52, 27);
+		new_scout_panel.add(state);
+		
+		JLabel lblState = new JLabel("State:");
+		lblState.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblState.setBounds(223, 278, 35, 16);
+		new_scout_panel.add(lblState);
+		
+		zipcode = new JTextField();
+		zipcode.setBounds(400, 272, 70, 28);
+		new_scout_panel.add(zipcode);
+		zipcode.setColumns(10);
+		
+		JLabel lblZipcode = new JLabel("Zipcode:");
+		lblZipcode.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblZipcode.setBounds(327, 278, 61, 16);
+		new_scout_panel.add(lblZipcode);
+		this.setVisible(true);
+	}
+}

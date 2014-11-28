@@ -35,6 +35,7 @@ public class Main extends JFrame{
 		frame.setSize(new Dimension(800,800));
 		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
+		frame.setJMenuBar(new MenuBar());
 		frame.setVisible(true);
 	}
 	

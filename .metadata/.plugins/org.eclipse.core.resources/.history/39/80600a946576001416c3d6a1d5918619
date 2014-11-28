@@ -1,0 +1,25 @@
+package java_database_project;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+public class MenuBar extends JMenuBar{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public MenuBar(){
+		JMenu file = new JMenu("File");
+		
+		//new item
+		JMenuItem New = new JMenuItem("New");
+		
+		file.add(New);
+		this.add(file);
+		
+	}
+
+}

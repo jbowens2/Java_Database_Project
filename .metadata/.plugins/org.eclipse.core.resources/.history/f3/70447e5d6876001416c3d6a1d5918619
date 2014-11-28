@@ -1,0 +1,13 @@
+package java_database_project;
+
+import java.awt.HeadlessException;
+import java.awt.Window;
+
+public class NewScout extends Window{
+
+	NewScout() throws HeadlessException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+}

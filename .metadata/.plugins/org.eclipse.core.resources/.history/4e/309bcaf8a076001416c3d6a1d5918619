@@ -1,0 +1,104 @@
+package java_database_project;
+
+import javax.swing.JTabbedPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import java.awt.Color;
+
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+
+import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.AbstractAction;
+
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+
+import javax.swing.Action;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+
+import net.proteanit.sql.DbUtils;
+import java.awt.event.ActionListener;
+
+public class TabbedPanel extends JTabbedPane{
+	
+	private static final long serialVersionUID = 1L;
+	private String[] states = { "MD","DC" };
+	public static JTable scout_table;
+	public static JTable volunteer_table;
+
+	public TabbedPanel (){	
+		setSize(800, 800);
+		
+		JPanel volunteer_tab_1 = new JPanel();
+		addTab("Volunteer", null, volunteer_tab_1, null);
+		volunteer_tab_1.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 0, 800, 800);
+		volunteer_tab_1.add(scrollPane_1);
+		
+		volunteer_table = new JTable();
+		scrollPane_1.setViewportView(volunteer_table);
+		
+		JPanel scout_tab = new JPanel();
+		scout_tab.setBackground(Color.LIGHT_GRAY);
+		addTab("Scout", null, scout_tab, null);
+		scout_tab.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 800, 800);
+		scout_tab.add(scrollPane);
+		
+		scout_table = new JTable();
+		scrollPane.setViewportView(scout_table);
+		
+		String[]  managers = {"Please select a manager"};;;
+		
+		loadData();	
+	}
+	
+	public void populateManager(JComboBox combo){
+		try{
+			Main.makeConnection();
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM Volunteer");
+			Main.result = Main.preparedStatement.executeQuery();
+			while (Main.result.next()){
+				combo.addItem(Main.result.getString("FIRSTNAME")+ " "+ Main.result.getString("LASTNAME"));
+			}
+			Main.closeConnection();
+			
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, e ,"Error!",JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
+	public void loadData(){
+		Main.makeConnection();
+		try {
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT PRODUCT_NAME, PRODUCT_DESCRIPTION, RETAIL_PRICE FROM product");
+			Main.result = Main.preparedStatement.executeQuery();
+			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, PHONE, EMAIL FROM scout");
+			Main.result = Main.preparedStatement.executeQuery();
+			TabbedPanel.scout_table.setModel(DbUtils.resultSetToTableModel(Main.result));
+			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM VOLUNTEER");
+			Main.result = Main.preparedStatement.executeQuery();
+			TabbedPanel.volunteer_table.setModel(DbUtils.resultSetToTableModel(Main.result));
+			
+			Main.closeConnection();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e ,"Please make sure you have a connection to your database!",JOptionPane.WARNING_MESSAGE);
+		}catch(Exception general){
+			JOptionPane.showMessageDialog(null, general ,"Error!",JOptionPane.WARNING_MESSAGE);
+		}
+		
+	}
+	
+}
