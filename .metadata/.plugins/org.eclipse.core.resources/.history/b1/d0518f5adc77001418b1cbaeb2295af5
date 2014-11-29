@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import java.awt.BorderLayout;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -19,7 +21,6 @@ import javax.swing.Action;
 
 import net.proteanit.sql.DbUtils;
 import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
 
 public class QueryWindow extends JFrame{
 
@@ -29,7 +30,6 @@ public class QueryWindow extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
-	private JTextArea Query;
 	
 	public QueryWindow(){
 		this.setTitle("Query Database");
@@ -57,17 +57,10 @@ public class QueryWindow extends JFrame{
 		run.setBounds(277, 302, 117, 29);
 		getContentPane().add(run);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 34, 378, 256);
-		getContentPane().add(scrollPane);
-		
-		Query = new JTextArea();
-		scrollPane.setViewportView(Query);
+		JTextArea Query = new JTextArea();
+		Query.setBounds(10, 34, 378, 256);
+		getContentPane().add(Query);
 		this.setVisible(true);
-	}
-	
-	public JFrame getFrame(){
-		return this;
 	}
 	
 	public void loadData(){
@@ -131,27 +124,22 @@ public class QueryWindow extends JFrame{
 			Main.makeConnection();
 			try{
 				Main.preparedStatement = Main.connection.prepareStatement(Query.getText());
-				//System.out.println(Main.preparedStatement);
 				Main.preparedStatement.executeUpdate();
-				//int affectedRows = Main.preparedStatement.executeUpdate();
+				int affectedRows = Main.preparedStatement.executeUpdate();
+				output.setText(Integer.toString(affectedRows));
 				Main.closeConnection();
 				loadData();
 			}catch(Exception e2){
-				JOptionPane.showMessageDialog(null, e2 ,"Error!",JOptionPane.WARNING_MESSAGE);
+				 output.setText(e2.toString());
 			}
 		}
 	}
 	private class SwingAction_1 extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
 		public SwingAction_1() {
 			putValue(NAME, "Done");
-			//putValue(SHORT_DESCRIPTION, "Some short description");
+			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
-			getFrame().dispose();
 		}
 	}
 }

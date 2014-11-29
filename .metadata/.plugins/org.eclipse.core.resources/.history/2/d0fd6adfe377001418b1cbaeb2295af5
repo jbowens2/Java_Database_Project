@@ -129,7 +129,7 @@ public class NewTroop extends JFrame{
 	public void populateManager(JComboBox combo){
 		try{
 			Main.makeConnection();
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM VOLUNTEER");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM Volunteer");
 			Main.result = Main.preparedStatement.executeQuery();
 			while (Main.result.next()){
 				combo.addItem(Main.result.getString("VOLUNTEER_ID"));

@@ -16,7 +16,6 @@ INDEX VERSION 1.126+/Users/jimmybowens/workspace/java_database_project/.metadata
 1819685514.index
 3004609673.index
 765977872.index
-3140574490.index
 1271342938.index
 2326659272.index
 450555687.index

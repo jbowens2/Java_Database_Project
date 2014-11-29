@@ -5,9 +5,11 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import java.awt.BorderLayout;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
@@ -19,7 +21,6 @@ import javax.swing.Action;
 
 import net.proteanit.sql.DbUtils;
 import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
 
 public class QueryWindow extends JFrame{
 
@@ -57,17 +58,10 @@ public class QueryWindow extends JFrame{
 		run.setBounds(277, 302, 117, 29);
 		getContentPane().add(run);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 34, 378, 256);
-		getContentPane().add(scrollPane);
-		
 		Query = new JTextArea();
-		scrollPane.setViewportView(Query);
+		Query.setBounds(10, 34, 378, 256);
+		getContentPane().add(Query);
 		this.setVisible(true);
-	}
-	
-	public JFrame getFrame(){
-		return this;
 	}
 	
 	public void loadData(){
@@ -151,7 +145,6 @@ public class QueryWindow extends JFrame{
 			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
-			getFrame().dispose();
 		}
 	}
 }

@@ -30,8 +30,8 @@ public class MenuBar extends JMenuBar{
 		
 		//new menu
 		JMenu New = new JMenu("New");
-		//JMenu Delete = new JMenu("Delete");
-		//JMenu Alter = new JMenu("Alter");
+		JMenu Delete = new JMenu("Delete");
+		JMenu Alter = new JMenu("Alter");
 		
 		//new sub category
 		JMenuItem newScout = new JMenuItem("Scout");
@@ -44,7 +44,7 @@ public class MenuBar extends JMenuBar{
 		newVolunteer.setAction(action_1);
 		JMenuItem newCustomer = new JMenuItem("Customer");
 		newCustomer.setAction(action_5);
-		//JMenuItem newShipment = new JMenuItem("Shipment");
+		JMenuItem newShipment = new JMenuItem("Shipment");
 		JMenuItem newOrder = new JMenuItem("Order");
 		newOrder.setAction(action_6);
 		New.add(newScout);
@@ -52,7 +52,7 @@ public class MenuBar extends JMenuBar{
 		New.add(newProduct);
 		New.add(newVolunteer);
 		New.add(newCustomer);
-		//New.add(newShipment);
+		New.add(newShipment);
 		New.add(newOrder);
 		file.add(New);
 		
