@@ -14,7 +14,11 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
 import net.proteanit.sql.DbUtils;
+
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.table.AbstractTableModel;
 
 public class TabbedPanel extends JTabbedPane{
 	
@@ -27,8 +31,15 @@ public class TabbedPanel extends JTabbedPane{
 	public static JTable shipment_table;
 	public static JTable product_table;
 	public static JTable order_table;
+	public static JTable money_table;
+	public static JTable inventory_table;
 
-	public TabbedPanel (){	
+	public TabbedPanel (){
+		addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				loadData();
+			}
+		});	
 		setSize(800, 800);
 		
 		JPanel volunteer_tab = new JPanel();
@@ -39,7 +50,15 @@ public class TabbedPanel extends JTabbedPane{
 		scrollPane_1.setBounds(0, 0, 800, 800);
 		volunteer_tab.add(scrollPane_1);
 		
-		volunteer_table = new JTable();
+		volunteer_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+		
+		
 		volunteer_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane_1.setViewportView(volunteer_table);
 		
@@ -51,7 +70,14 @@ public class TabbedPanel extends JTabbedPane{
 		scrollPane_2.setBounds(0, 0, 800, 800);
 		troop_tab.add(scrollPane_2);
 		
-		troop_table = new JTable();
+		troop_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
 		troop_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane_2.setViewportView(troop_table);
 		
@@ -64,7 +90,14 @@ public class TabbedPanel extends JTabbedPane{
 		scrollPane.setBounds(0, 0, 800, 800);
 		scout_tab.add(scrollPane);
 		
-		scout_table = new JTable();
+		scout_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
 		scout_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setViewportView(scout_table);
 		
@@ -76,7 +109,14 @@ public class TabbedPanel extends JTabbedPane{
 		scrollPane_3.setBounds(0, 0, 800, 800);
 		customer_tab.add(scrollPane_3);
 		
-		customer_table = new JTable();
+		customer_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
 		customer_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane_3.setViewportView(customer_table);
 		
@@ -88,7 +128,14 @@ public class TabbedPanel extends JTabbedPane{
 		scrollPane_4.setBounds(0, 0, 800, 800);
 		shipment_tab.add(scrollPane_4);
 		
-		shipment_table = new JTable();
+		shipment_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
 		shipment_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane_4.setViewportView(shipment_table);
 		
@@ -100,7 +147,14 @@ public class TabbedPanel extends JTabbedPane{
 		scrollPane_5.setBounds(0, 0, 800, 800);
 		product_tab.add(scrollPane_5);
 		
-		product_table = new JTable();
+		product_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
 		scrollPane_5.setViewportView(product_table);
 		
 		JPanel order_tab = new JPanel();
@@ -111,8 +165,51 @@ public class TabbedPanel extends JTabbedPane{
 		scrollPane_6.setBounds(0, 0, 800, 800);
 		order_tab.add(scrollPane_6);
 		
-		order_table = new JTable();
+		order_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
 		scrollPane_6.setViewportView(order_table);
+		
+		JPanel money_tab = new JPanel();
+		addTab("Money", null, money_tab, null);
+		money_tab.setLayout(null);
+		
+		JScrollPane scrollPane_7 = new JScrollPane();
+		scrollPane_7.setBounds(0, 0, 800, 800);
+		money_tab.add(scrollPane_7);
+		
+		money_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
+		scrollPane_7.setViewportView(money_table);
+		
+		JPanel inventory_tab = new JPanel();
+		addTab("Inventory", null, inventory_tab, null);
+		inventory_tab.setLayout(null);
+		
+		JScrollPane scrollPane_8 = new JScrollPane();
+		scrollPane_8.setBounds(0, 0, 800, 800);
+		inventory_tab.add(scrollPane_8);
+		
+		inventory_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+	    
+		scrollPane_8.setViewportView(inventory_table);
 		
 		
 		loadData();	
@@ -140,7 +237,7 @@ public class TabbedPanel extends JTabbedPane{
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.product_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, PHONE, EMAIL FROM scout");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM SCOUT");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.scout_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
@@ -163,6 +260,14 @@ public class TabbedPanel extends JTabbedPane{
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM PRODUCT_ORDER");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.order_table.setModel(DbUtils.resultSetToTableModel(Main.result));
+			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM MONEY");
+			Main.result = Main.preparedStatement.executeQuery();
+			TabbedPanel.money_table.setModel(DbUtils.resultSetToTableModel(Main.result));
+			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM INVENTORY");
+			Main.result = Main.preparedStatement.executeQuery();
+			TabbedPanel.inventory_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
 			Main.closeConnection();
 		} catch (SQLException e) {

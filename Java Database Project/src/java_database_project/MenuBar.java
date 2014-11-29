@@ -30,6 +30,8 @@ public class MenuBar extends JMenuBar{
 		
 		//new menu
 		JMenu New = new JMenu("New");
+		JMenu Delete = new JMenu("Delete");
+		JMenu Alter = new JMenu("Alter");
 		
 		//new sub category
 		JMenuItem newScout = new JMenuItem("Scout");

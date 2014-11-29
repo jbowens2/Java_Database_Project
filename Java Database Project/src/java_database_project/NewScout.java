@@ -35,6 +35,7 @@ public class NewScout extends JFrame{
 	private JTextField zipcode;
 	
 	private static JComboBox state_combo;
+	private static JComboBox Troop_Combo;
 	private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
@@ -77,7 +78,7 @@ public class NewScout extends JFrame{
 		lblTroop.setBounds(30, 37, 61, 16);
 		new_scout_panel.add(lblTroop);
 		
-		JComboBox Troop_Combo = new JComboBox();
+		Troop_Combo = new JComboBox();
 		Troop_Combo.setBounds(103, 33, 134, 27);
 		new_scout_panel.add(Troop_Combo);
 		
@@ -204,7 +205,7 @@ public class NewScout extends JFrame{
 		Main.makeConnection();
 		try {
 			
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT FIRSTNAME, LASTNAME, PHONE, EMAIL FROM SCOUT");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM SCOUT");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.scout_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
@@ -234,7 +235,7 @@ public class NewScout extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			Main.makeConnection();
 			try{
-				Main.preparedStatement = Main.connection.prepareStatement("INSERT INTO SCOUT (`FIRSTNAME`, `LASTNAME`,`PHONE`,`EMAIL`,`BIRTHDATE`,`START_DATE`,`PARENT`,`ADDRESS`,`CITY`,`STATE`,`ZIPCODE`) values(?,?,?,?,?,?,?,?,?,?,?)");
+				Main.preparedStatement = Main.connection.prepareStatement("INSERT INTO SCOUT (`FIRSTNAME`, `LASTNAME`,`PHONE`,`EMAIL`,`BIRTHDATE`,`START_DATE`,`PARENT`,`ADDRESS`,`CITY`,`STATE`,`ZIPCODE`, `TROOP_ID`) values(?,?,?,?,?,?,?,?,?,?,?,?)");
 				Main.preparedStatement.setString(1, firstname.getText());
 				Main.preparedStatement.setString(2, lastname.getText());
 				Main.preparedStatement.setString(3, phone.getText());
@@ -247,6 +248,7 @@ public class NewScout extends JFrame{
 				String stateValue = state_combo.getSelectedItem().toString();
 				Main.preparedStatement.setString(10, stateValue);
 				Main.preparedStatement.setString(11, zipcode.getText());
+				Main.preparedStatement.setInt(12, Integer.valueOf(Troop_Combo.getSelectedItem().toString()));
 				Main.preparedStatement.execute();
 				loadData();
 				//resetTabs();

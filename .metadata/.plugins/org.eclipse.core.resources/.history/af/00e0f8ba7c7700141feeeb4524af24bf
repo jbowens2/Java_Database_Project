@@ -1,0 +1,72 @@
+package java_database_project;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+
+public class QueryWindow extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField Query;
+	private final Action action = new SwingAction();
+	
+	public QueryWindow(){
+		this.setTitle("Query Database");
+		this.setSize(new Dimension(400,400));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		
+		JLabel lblEnterQueryBelow = new JLabel("Enter Query Below");
+		lblEnterQueryBelow.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEnterQueryBelow.setBounds(0, 6, 388, 16);
+		getContentPane().add(lblEnterQueryBelow);
+		
+		Query = new JTextField();
+		Query.setBounds(10, 34, 378, 28);
+		getContentPane().add(Query);
+		Query.setColumns(10);
+		
+		JButton done = new JButton("Done");
+		done.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		done.setBounds(20, 74, 117, 29);
+		getContentPane().add(done);
+		
+		JButton run = new JButton("Run Query");
+		run.setAction(action);
+		run.setBounds(271, 74, 117, 29);
+		getContentPane().add(run);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(10, 115, 378, 257);
+		getContentPane().add(lblNewLabel);
+		this.setVisible(true);
+	}
+	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction() {
+			putValue(NAME, "Run Query");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
+	}
+}
