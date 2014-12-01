@@ -144,7 +144,7 @@ public class NewTroop extends JFrame{
 	public void loadData(){
 		Main.makeConnection();
 		try {
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT NAME, ADDRESS, CITY, STATE, ZIPCODE, MANAGER, FIRSTNAME, LASTNAME FROM TROOP, VOLUNTEER WHERE TROOP.MANAGER = VOLUNTEER.VOLUNTEER_ID");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM TROOP");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.troop_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			

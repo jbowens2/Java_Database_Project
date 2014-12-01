@@ -1,0 +1,9 @@
+package java_database_project;
+
+public class Launcher {
+
+	public static void main(String[] args) {
+		new Main();
+	}
+
+}

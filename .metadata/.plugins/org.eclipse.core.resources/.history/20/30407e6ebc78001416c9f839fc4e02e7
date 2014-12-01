@@ -1,0 +1,22 @@
+package java_database_project;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class StatsWindow extends JFrame{
+
+	private static final long serialVersionUID = 1L;
+	
+	public StatsWindow(){
+		this.setTitle("Statistics");
+		this.setSize(new Dimension(400,400));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		
+		JLayeredPane statsLayeredPane = new JLayeredPane();
+		statsLayeredPane.setBounds(0, 0, 400, 400);
+		getContentPane().add(statsLayeredPane);
+		this.setVisible(true);
+	}
+}

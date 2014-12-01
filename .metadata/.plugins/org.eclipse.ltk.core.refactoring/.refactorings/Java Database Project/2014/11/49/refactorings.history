@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;NewScout.java&apos; to &apos;Java Database Project/src/java_database_project&apos;&#x0A;- Original project: &apos;Java Database Project&apos;&#x0A;- Destination element: &apos;Java Database Project/src/java_database_project&apos;&#x0A;- Original element: &apos;java_database_project.NewScout.java&apos;" description="Copy compilation unit" destination="/src&lt;java_database_project" element1="/src&lt;java_database_project{NewScout.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1417359916480" units="1" version="1.0"/>
+</session>

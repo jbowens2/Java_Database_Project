@@ -177,6 +177,10 @@ public class NewOrder extends JFrame{
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.shipment_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM INVENTORY");
+			Main.result = Main.preparedStatement.executeQuery();
+			TabbedPanel.inventory_table.setModel(DbUtils.resultSetToTableModel(Main.result));
+			
 			Main.closeConnection();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e ,"Please make sure you have a connection to your database!",JOptionPane.WARNING_MESSAGE);

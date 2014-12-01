@@ -18,6 +18,8 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TabbedPanel extends JTabbedPane{
 	
@@ -32,11 +34,24 @@ public class TabbedPanel extends JTabbedPane{
 	public static JTable order_table;
 	public static JTable money_table;
 	public static JTable inventory_table;
+	
+	//volunteer temp variables
+	public static String temp_volunteer_id, temp_firstname, temp_lastname, temp_phone;
+	//end volunteer temp variables
+	
+	//troop temp variables
+	public static String temp_troop_id,temp_troop_name, temp_troop_address, temp_troop_city, temp_troop_state, temp_troop_zipcode, temp_troop_manager;
+	//end troop temp variables
+	
+	//scout temp variables
+	public static String temp_scout_id, temp_scout_firstname, temp_scout_lastname, temp_scout_phone, temp_scout_email, temp_scout_birthdate, temp_scout_startdate, temp_scout_parent, temp_scout_address, temp_scout_city, temp_scout_state, temp_scout_zipcode, temp_scout_troop_id;
+	public static int stateColumn;
+	//end scout temp variables
 
 	public TabbedPanel (){
 		addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				loadData();
+				//loadData();
 			}
 		});	
 		setSize(800, 800);
@@ -56,9 +71,23 @@ public class TabbedPanel extends JTabbedPane{
 	                return false;               
 	        };
 	    };
+		volunteer_table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					//System.out.println(volunteer_table.getValueAt(volunteer_table.getSelectedRow(), volunteer_table.getSelectedColumn()));
+					temp_volunteer_id = volunteer_table.getValueAt(volunteer_table.getSelectedRow(), 0).toString();
+					temp_firstname = volunteer_table.getValueAt(volunteer_table.getSelectedRow(), 1).toString();
+					temp_lastname = volunteer_table.getValueAt(volunteer_table.getSelectedRow(), 2).toString();
+					temp_phone = volunteer_table.getValueAt(volunteer_table.getSelectedRow(), 3).toString();
+					new EditVolunteer();
+				}
+			}
+		});
 		
-		
+	    
 		volunteer_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		volunteer_table.setRowSelectionAllowed(true);
 		scrollPane_1.setViewportView(volunteer_table);
 		
 		JPanel troop_tab = new JPanel();
@@ -76,6 +105,21 @@ public class TabbedPanel extends JTabbedPane{
 	                return false;               
 	        };
 	    };
+		troop_table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					TabbedPanel.temp_troop_id = troop_table.getValueAt(troop_table.getSelectedRow(), 0).toString();
+					TabbedPanel.temp_troop_name = troop_table.getValueAt(troop_table.getSelectedRow(), 1).toString();
+					TabbedPanel.temp_troop_address = troop_table.getValueAt(troop_table.getSelectedRow(), 2).toString();
+					TabbedPanel.temp_troop_city = troop_table.getValueAt(troop_table.getSelectedRow(), 3).toString();
+					TabbedPanel.temp_troop_state = troop_table.getValueAt(troop_table.getSelectedRow(), 4).toString();
+					TabbedPanel.temp_troop_zipcode = troop_table.getValueAt(troop_table.getSelectedRow(), 5).toString();
+					new EditTroop();
+				}
+				
+			}
+		});
 	    
 		troop_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane_2.setViewportView(troop_table);
@@ -96,6 +140,27 @@ public class TabbedPanel extends JTabbedPane{
 	                return false;               
 	        };
 	    };
+		scout_table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(e.getClickCount() == 2){
+					TabbedPanel.temp_scout_id = scout_table.getValueAt(scout_table.getSelectedRow(), 0).toString();
+					TabbedPanel.temp_scout_firstname = scout_table.getValueAt(scout_table.getSelectedRow(), 1).toString();
+					TabbedPanel.temp_scout_lastname = scout_table.getValueAt(scout_table.getSelectedRow(), 2).toString();
+					TabbedPanel.temp_scout_phone = scout_table.getValueAt(scout_table.getSelectedRow(), 3).toString();
+					TabbedPanel.temp_scout_email = scout_table.getValueAt(scout_table.getSelectedRow(), 4).toString();
+					TabbedPanel.temp_scout_birthdate = scout_table.getValueAt(scout_table.getSelectedRow(), 5).toString();
+					TabbedPanel.temp_scout_startdate = scout_table.getValueAt(scout_table.getSelectedRow(), 6).toString();
+					TabbedPanel.temp_scout_parent = scout_table.getValueAt(scout_table.getSelectedRow(), 7).toString();
+					TabbedPanel.temp_scout_address = scout_table.getValueAt(scout_table.getSelectedRow(), 8).toString();
+					TabbedPanel.temp_scout_city = scout_table.getValueAt(scout_table.getSelectedRow(), 9).toString();
+					TabbedPanel.temp_scout_state = scout_table.getValueAt(scout_table.getSelectedRow(), 10).toString();
+					TabbedPanel.temp_scout_zipcode = scout_table.getValueAt(scout_table.getSelectedRow(), 11).toString();
+					TabbedPanel.temp_scout_troop_id = scout_table.getValueAt(scout_table.getSelectedRow(), 12).toString();
+					new EditScout();
+				}
+			}
+		});
 	    
 		scout_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane.setViewportView(scout_table);
@@ -118,25 +183,6 @@ public class TabbedPanel extends JTabbedPane{
 	    
 		customer_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		scrollPane_3.setViewportView(customer_table);
-		
-		JPanel shipment_tab = new JPanel();
-		addTab("Shipment", null, shipment_tab, null);
-		shipment_tab.setLayout(null);
-		
-		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(0, 0, 800, 800);
-		shipment_tab.add(scrollPane_4);
-		
-		shipment_table = new JTable(){
-	        private static final long serialVersionUID = 1L;
-
-	        public boolean isCellEditable(int row, int column) {                
-	                return false;               
-	        };
-	    };
-	    
-		shipment_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		scrollPane_4.setViewportView(shipment_table);
 		
 		JPanel product_tab = new JPanel();
 		addTab("Product", null, product_tab, null);
@@ -192,6 +238,25 @@ public class TabbedPanel extends JTabbedPane{
 	    
 		scrollPane_7.setViewportView(money_table);
 		
+		JPanel shipment_tab = new JPanel();
+		addTab("Shipment", null, shipment_tab, null);
+		shipment_tab.setLayout(null);
+		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(0, 0, 800, 800);
+		shipment_tab.add(scrollPane_4);
+		
+		shipment_table = new JTable(){
+	        private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
+		
+		shipment_table.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		scrollPane_4.setViewportView(shipment_table);
+		
 		JPanel inventory_tab = new JPanel();
 		addTab("Inventory", null, inventory_tab, null);
 		inventory_tab.setLayout(null);
@@ -229,6 +294,7 @@ public class TabbedPanel extends JTabbedPane{
 		}
 	}
 	
+
 	public void loadData(){
 		Main.makeConnection();
 		try {
@@ -244,7 +310,8 @@ public class TabbedPanel extends JTabbedPane{
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.volunteer_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
-			Main.preparedStatement = Main.connection.prepareStatement("SELECT NAME, ADDRESS, CITY, STATE, ZIPCODE, MANAGER, FIRSTNAME, LASTNAME FROM TROOP, VOLUNTEER WHERE TROOP.MANAGER = VOLUNTEER.VOLUNTEER_ID");
+			//Main.preparedStatement = Main.connection.prepareStatement("SELECT NAME, ADDRESS, CITY, STATE, ZIPCODE, MANAGER, FIRSTNAME, LASTNAME FROM TROOP, VOLUNTEER WHERE TROOP.MANAGER = VOLUNTEER.VOLUNTEER_ID");
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM TROOP");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.troop_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			

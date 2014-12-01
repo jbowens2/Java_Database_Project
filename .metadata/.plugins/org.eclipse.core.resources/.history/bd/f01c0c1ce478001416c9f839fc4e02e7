@@ -1,0 +1,126 @@
+package java_database_project;
+
+import javax.swing.*;
+
+import net.proteanit.sql.DbUtils;
+
+import java.awt.*;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+
+public class StatsWindow extends JFrame{
+
+	private static final long serialVersionUID = 1L;
+	private JLabel total_inventory;
+	public static JTable inventory_per_troop;
+	private JLayeredPane statsLayeredPane;
+	private final Action action = new SwingAction();
+    public static JTable inventory_per_product;
+	public StatsWindow(){
+		this.setTitle("Statistics");
+		this.setSize(new Dimension(400, 600));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(null);
+		
+		statsLayeredPane = new JLayeredPane();
+		statsLayeredPane.setBounds(0, 47, 400, 531);
+		getContentPane().add(statsLayeredPane);
+		
+		JPanel inventoryStats = new JPanel();
+		inventoryStats.setBounds(0, 6, 400, 525);
+		statsLayeredPane.add(inventoryStats);
+		inventoryStats.setLayout(null);
+		
+		JLabel lblTotalInventory = new JLabel("Total Inventory:");
+		lblTotalInventory.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTotalInventory.setBounds(6, 6, 106, 16);
+		inventoryStats.add(lblTotalInventory);
+		
+		total_inventory = new JLabel("total inventory");
+		total_inventory.setHorizontalAlignment(SwingConstants.CENTER);
+		total_inventory.setBounds(124, 6, 85, 16);
+		inventoryStats.add(total_inventory);
+		
+		JLabel lblTotal = new JLabel("Total Inventory Per Troop");
+		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotal.setBounds(16, 34, 378, 16);
+		inventoryStats.add(lblTotal);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 62, 388, 180);
+		inventoryStats.add(scrollPane);
+		
+		inventory_per_troop = new JTable();
+		scrollPane.setViewportView(inventory_per_troop);
+		
+		JLabel lblNewLabel = new JLabel("Total Inventory Per Product");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(6, 254, 388, 16);
+		inventoryStats.add(lblNewLabel);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(6, 282, 388, 180);
+		inventoryStats.add(scrollPane_1);
+		
+		inventory_per_product = new JTable();
+		scrollPane_1.setViewportView(inventory_per_product);
+		
+		JPanel shipmentStats = new JPanel();
+		shipmentStats.setBounds(0, 6, 400, 525);
+		statsLayeredPane.add(shipmentStats);
+		
+		JButton btnInventory = new JButton("Inventory");
+		btnInventory.setBounds(6, 6, 117, 29);
+		getContentPane().add(btnInventory);
+		btnInventory.setAction(action);
+		
+		JButton btnShipment = new JButton("Shipment");
+		btnShipment.setBounds(135, 6, 117, 29);
+		getContentPane().add(btnShipment);
+		
+		JButton btnProduct = new JButton("Product");
+		btnProduct.setBounds(264, 6, 117, 29);
+		getContentPane().add(btnProduct);
+		this.setVisible(true);
+		
+		loadData();
+	}
+	
+	public void loadData(){
+		Main.makeConnection();
+		try {
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT SUM(QUANTITY) FROM INVENTORY");
+			Main.result = Main.preparedStatement.executeQuery();
+			while(Main.result.next()){
+				total_inventory.setText(String.valueOf(Main.result.getLong(1)));
+			}
+			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT TROOP_ID, NAME, (SELECT SUM(QUANTITY) FROM INVENTORY AS A WHERE A.TROOP_ID = TROOP.TROOP_ID) FROM TROOP");
+			Main.result = Main.preparedStatement.executeQuery();
+			StatsWindow.inventory_per_troop.setModel(DbUtils.resultSetToTableModel(Main.result));
+			
+			Main.preparedStatement = Main.connection.prepareStatement("SELECT PRODUCT_ID, NAME (SELECT SUM(QUANTITY) FROM INVENTORY WHERE INVENTORY.PRODUCT_ID = PRODUCT_ORDER.PRODUCT_ID) FROM PRODUCT_ORDER ORDER BY PRODUCT_ORDER.PRODUCT_ID;");
+			Main.result = Main.preparedStatement.executeQuery();
+			StatsWindow.inventory_per_product.setModel(DbUtils.resultSetToTableModel(Main.result));
+			Main.closeConnection();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, e ,"Please make sure you have a connection to your database!",JOptionPane.WARNING_MESSAGE);
+		}catch(Exception general){
+			JOptionPane.showMessageDialog(null, general ,"Error!",JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction() {
+			putValue(NAME, "Inventory");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			JLayeredPane.getLayer(total_inventory);
+		}
+	}
+}
