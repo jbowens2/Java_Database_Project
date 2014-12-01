@@ -14,7 +14,9 @@ import javax.swing.AbstractAction;
 
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
+
 import javax.swing.Action;
+
 import net.proteanit.sql.DbUtils;
 
 public class NewScout extends JFrame{
@@ -34,8 +36,8 @@ public class NewScout extends JFrame{
 	private JTextField city;
 	private JTextField zipcode;
 	
-	private static JComboBox state_combo;
-	private static JComboBox Troop_Combo;
+	private static JComboBox<Object> state_combo;
+	private static JComboBox<String> Troop_Combo;
 	private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
@@ -78,7 +80,7 @@ public class NewScout extends JFrame{
 		lblTroop.setBounds(30, 37, 61, 16);
 		new_scout_panel.add(lblTroop);
 		
-		Troop_Combo = new JComboBox();
+		Troop_Combo = new JComboBox<String>();
 		Troop_Combo.setBounds(103, 33, 134, 27);
 		new_scout_panel.add(Troop_Combo);
 		
@@ -180,13 +182,13 @@ public class NewScout extends JFrame{
 		btnSave.setBounds(353, 323, 117, 29);
 		new_scout_panel.add(btnSave);
 		
-		state_combo = new JComboBox(states);
+		state_combo = new JComboBox<Object>(states);
 		state_combo.setBounds(249, 272, 75, 27);
 		new_scout_panel.add(state_combo);
 		this.setVisible(true);
 	}
 	
-	public void populateTroop(JComboBox combo){
+	public void populateTroop(JComboBox<String> combo){
 		try{
 			Main.makeConnection();
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM TROOP");

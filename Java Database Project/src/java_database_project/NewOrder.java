@@ -31,7 +31,7 @@ public class NewOrder extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
-	private JComboBox scout_combo, customer_combo, product_combo;
+	private JComboBox<String> scout_combo, customer_combo, product_combo;
 	private JTextField quantity;
 
 	public NewOrder(){
@@ -62,13 +62,13 @@ public class NewOrder extends JFrame{
 		btnSave.setBounds(416, 176, 117, 29);
 		new_volunteer_panel.add(btnSave);
 		
-		scout_combo = new JComboBox();
+		scout_combo = new JComboBox<String>();
 		scout_combo.setBounds(117, 40, 80, 27);
 		new_volunteer_panel.add(scout_combo);
 		
 		populateScout(scout_combo);
 		
-		customer_combo = new JComboBox();
+		customer_combo = new JComboBox<String>();
 		customer_combo.setBounds(288, 40, 80, 27);
 		new_volunteer_panel.add(customer_combo);
 		
@@ -79,7 +79,7 @@ public class NewOrder extends JFrame{
 		lblCustomer.setBounds(201, 44, 75, 16);
 		new_volunteer_panel.add(lblCustomer);
 		
-		product_combo = new JComboBox();
+		product_combo = new JComboBox<String>();
 		product_combo.setBounds(453, 40, 80, 27);
 		new_volunteer_panel.add(product_combo);
 		
@@ -117,7 +117,7 @@ public class NewOrder extends JFrame{
 		this.setVisible(true);
 	}
 	
-	public void populateScout(JComboBox combo){
+	public void populateScout(JComboBox<String> combo){
 		try{
 			Main.makeConnection();
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM SCOUT");
@@ -132,7 +132,7 @@ public class NewOrder extends JFrame{
 		}
 	}
 	
-	public void populateCustomer(JComboBox combo){
+	public void populateCustomer(JComboBox<String> combo){
 		try{
 			Main.makeConnection();
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM CUSTOMER");
@@ -147,7 +147,7 @@ public class NewOrder extends JFrame{
 		}
 	}
 	
-	public void populateProduct(JComboBox combo){
+	public void populateProduct(JComboBox<String> combo){
 		try{
 			Main.makeConnection();
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM PRODUCT");

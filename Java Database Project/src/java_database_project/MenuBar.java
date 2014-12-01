@@ -21,6 +21,7 @@ public class MenuBar extends JMenuBar{
 	private final Action action_5 = new SwingAction_5();
 	private final Action action_6 = new SwingAction_6();
 	private final Action action_7 = new SwingAction_7();
+	private final Action action_8 = new SwingAction_8();
 	
 	public MenuBar(){
 		JMenu file = new JMenu("File");
@@ -28,6 +29,8 @@ public class MenuBar extends JMenuBar{
 		JMenu query = new JMenu("Query");
 		JMenu report = new JMenu("Report");
 		JMenu statistics = new JMenu("Statistics");
+		JMenu about = new JMenu("About");
+		JMenu help = new JMenu("Help");
 		
 		//new menu
 		JMenu New = new JMenu("New");
@@ -59,6 +62,10 @@ public class MenuBar extends JMenuBar{
 		
 		//
 		
+		JMenuItem tutorial = new JMenuItem("Tutorial");
+		tutorial.setAction(action_8);
+		help.add(tutorial);
+		
 		JMenuItem allStatistics = new JMenuItem("All Statistics");
 		allStatistics.setAction(action_7);
 		statistics.add(allStatistics);
@@ -66,11 +73,12 @@ public class MenuBar extends JMenuBar{
 		JMenuItem loadQuery = new JMenuItem("New Query");
 		loadQuery.setAction(action_3);
 		query.add(loadQuery);
+		this.add(about);
 		this.add(file);
-		//this.add(edit);
 		this.add(query);
 		this.add(report);
 		this.add(statistics);
+		this.add(help);
 		
 	}
 
@@ -177,6 +185,19 @@ public class MenuBar extends JMenuBar{
 		}
 		public void actionPerformed(ActionEvent e) {
 			new StatsWindow();
+		}
+	}
+	private class SwingAction_8 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_8() {
+			putValue(NAME, "Tutorial");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new Help();
 		}
 	}
 }

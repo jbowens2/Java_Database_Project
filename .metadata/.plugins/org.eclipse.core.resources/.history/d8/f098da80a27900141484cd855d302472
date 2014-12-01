@@ -1,0 +1,20 @@
+package java_database_project;
+
+import javax.swing.JFrame;
+import javax.swing.JTree;
+
+public class Help extends JFrame{
+	public Help() {
+		getContentPane().setLayout(null);
+		this.setResizable(false);
+		JTree tree = new JTree();
+		tree.setBounds(0, 0, 434, 433);
+		getContentPane().add(tree);
+		this.setVisible(true);
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+}

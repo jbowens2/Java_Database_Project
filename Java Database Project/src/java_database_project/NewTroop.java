@@ -17,8 +17,11 @@ import java.awt.event.ActionEvent;
 
 import java.sql.SQLException;
 
-
 import javax.swing.Action;
+
+
+
+
 
 
 
@@ -34,8 +37,8 @@ public class NewTroop extends JFrame{
 	private JTextField city;
 	private JTextField zipcode;
 	
-	private static JComboBox state_combo;
-	private static JComboBox manager;
+	private static JComboBox<String> state_combo;
+	private static JComboBox<String> manager;
 	private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
@@ -59,7 +62,7 @@ public class NewTroop extends JFrame{
 		lblTroop.setBounds(30, 25, 61, 16);
 		new_troop_panel.add(lblTroop);
 		
-		manager = new JComboBox();
+		manager = new JComboBox<String>();
 		manager.setBounds(103, 21, 134, 27);
 		new_troop_panel.add(manager);
 		
@@ -110,7 +113,7 @@ public class NewTroop extends JFrame{
 		btnSave.setBounds(353, 190, 117, 29);
 		new_troop_panel.add(btnSave);
 		
-		state_combo = new JComboBox(states);
+		state_combo = new JComboBox<String>(states);
 		state_combo.setBounds(249, 140, 75, 27);
 		new_troop_panel.add(state_combo);
 		
@@ -126,7 +129,7 @@ public class NewTroop extends JFrame{
 		this.setVisible(true);
 	}
 	
-	public void populateManager(JComboBox combo){
+	public void populateManager(JComboBox<String> combo){
 		try{
 			Main.makeConnection();
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM VOLUNTEER");
