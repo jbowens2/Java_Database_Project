@@ -1,0 +1,25 @@
+package java_database_project;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+public class Help extends JFrame{
+	public Help() {
+		getContentPane().setLayout(null);
+		this.setResizable(false);
+		this.setSize(new Dimension(400,400));
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Tutorial");
+		
+		JTree tutorialTree = new JTree(root);
+		this.add(tutorialTree);
+		this.setVisible(true);
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+}

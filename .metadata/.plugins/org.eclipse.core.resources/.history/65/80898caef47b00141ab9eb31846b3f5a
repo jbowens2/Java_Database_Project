@@ -1,0 +1,36 @@
+package java_database_project;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+
+public class Help extends JFrame{
+	public Help() {
+		getContentPane().setLayout(null);
+		this.setResizable(false);
+		this.setSize(new Dimension(400,400));
+		
+		//create the root node
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root");
+        //create the child nodes
+        DefaultMutableTreeNode vegetableNode = new DefaultMutableTreeNode("Vegetables");
+        DefaultMutableTreeNode fruitNode = new DefaultMutableTreeNode("Fruits");
+ 
+        //add the child nodes to the root node
+        root.add(vegetableNode);
+        root.add(fruitNode);
+         
+        //create the tree by passing in the root node
+        JTree tree = new JTree(root);
+		add(tree);
+		
+		this.setVisible(true);
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+}
