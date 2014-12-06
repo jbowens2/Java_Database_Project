@@ -29,7 +29,7 @@ public class NewCustomer extends JFrame{
 	private JTextField lastname;
 	private JTextField phone;
 	private JTextField email;
-	private JComboBox<String> Scout_Combo;
+	private JComboBox Scout_Combo;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 
@@ -71,7 +71,7 @@ public class NewCustomer extends JFrame{
 		lblTroop.setBounds(30, 37, 61, 16);
 		new_scout_panel.add(lblTroop);
 		
-		Scout_Combo = new JComboBox<String>();
+		Scout_Combo = new JComboBox();
 		Scout_Combo.setBounds(103, 33, 134, 27);
 		new_scout_panel.add(Scout_Combo);
 		
@@ -109,7 +109,7 @@ public class NewCustomer extends JFrame{
 		this.setVisible(true);
 	}
 	
-	public void populateTroop(JComboBox<String> combo){
+	public void populateTroop(JComboBox combo){
 		try{
 			Main.makeConnection();
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM SCOUT");

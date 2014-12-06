@@ -279,7 +279,7 @@ public class TabbedPanel extends JTabbedPane{
 		loadData();	
 	}
 	
-	public void populateManager(JComboBox<String> combo){
+	public void populateManager(JComboBox combo){
 		try{
 			Main.makeConnection();
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM Volunteer");
