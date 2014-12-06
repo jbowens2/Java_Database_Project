@@ -29,16 +29,20 @@ public class Help extends JFrame{
 	     
 	     //second level
 	     DefaultMutableTreeNode newMenu = new DefaultMutableTreeNode("New");
+	     DefaultMutableTreeNode newQuery = new DefaultMutableTreeNode("New Query");
+	     DefaultMutableTreeNode allStats = new DefaultMutableTreeNode("All Statistics");
 	     fileMenu.add(newMenu);
+	     queryMenu.add((newQuery));
+	     statisticsMenu.add(allStats);
 	    
 	     //third level
 	     final DefaultMutableTreeNode newVolunteer = new DefaultMutableTreeNode("Volunteer");
-	     DefaultMutableTreeNode newTroop = new DefaultMutableTreeNode("Troop");
-	     DefaultMutableTreeNode newScout = new DefaultMutableTreeNode("Scout");
-	     DefaultMutableTreeNode newCustomer = new DefaultMutableTreeNode("Customer");
-	     DefaultMutableTreeNode newProduct = new DefaultMutableTreeNode("Product");
-	     DefaultMutableTreeNode newOrder = new DefaultMutableTreeNode("Order");
-	     DefaultMutableTreeNode newMoney = new DefaultMutableTreeNode("Money");
+	     final DefaultMutableTreeNode newTroop = new DefaultMutableTreeNode("Troop");
+	     final DefaultMutableTreeNode newScout = new DefaultMutableTreeNode("Scout");
+	     final DefaultMutableTreeNode newCustomer = new DefaultMutableTreeNode("Customer");
+	     final DefaultMutableTreeNode newProduct = new DefaultMutableTreeNode("Product");
+	     final DefaultMutableTreeNode newOrder = new DefaultMutableTreeNode("Order");
+	     final DefaultMutableTreeNode newMoney = new DefaultMutableTreeNode("Money");
 	     
 	     newMenu.add(newVolunteer);
 	     newMenu.add(newTroop);
@@ -67,10 +71,25 @@ public class Help extends JFrame{
 			public void valueChanged(TreeSelectionEvent e) {
 				DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
 				if (selectedNode.equals(aboutMenu)){
-					makeConnection("http://girlsscoutcookie.jimmybowens.com/about.pdf");
+					makeConnection("http://girlsscoutcookie.jimmybowens.com/tutorial/about.pdf");
 				}
 				else if(selectedNode.equals(newVolunteer)){
-					makeConnection("http://girlsscoutcookie.jimmybowens.com/volunteer.pdf");
+					makeConnection("http://girlsscoutcookie.jimmybowens.com/tutorial/new/volunteer.pdf");
+				}
+				else if(selectedNode.equals(newTroop)){
+					makeConnection("http://girlsscoutcookie.jimmybowens.com/tutorial/new/troop.pdf");
+				}
+				else if(selectedNode.equals(newScout)){
+					makeConnection("http://girlsscoutcookie.jimmybowens.com/scout.pdf");
+				}
+				else if(selectedNode.equals(newProduct)){
+					makeConnection("http://girlsscoutcookie.jimmybowens.com/product.pdf");
+				}
+				else if(selectedNode.equals(newOrder)){
+					makeConnection("http://girlsscoutcookie.jimmybowens.com/order.pdf");
+				}
+				else if(selectedNode.equals(newMoney)){
+					makeConnection("http://girlsscoutcookie.jimmybowens.com/money.pdf");
 				}
 			}
 			
