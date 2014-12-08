@@ -1,0 +1,101 @@
+package java_database_project;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.AbstractAction;
+
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+
+import javax.swing.Action;
+
+public class Login extends JFrame{
+	private static final long serialVersionUID = 1L;
+	private JTextField username;
+	private JPasswordField password;
+	private final Action action = new SwingAction();
+	public Login() {
+		this.setTitle("Login");
+		this.setSize(new Dimension(200,250));
+		this.setResizable(false);
+		getContentPane().setLayout(null);
+		
+		JPanel loginPanel = new JPanel();
+		loginPanel.setBounds(0, 0, 194, 372);
+		getContentPane().add(loginPanel);
+		loginPanel.setLayout(null);
+		
+		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setBounds(10, 36, 174, 14);
+		loginPanel.add(lblUsername);
+		lblUsername.setHorizontalAlignment(SwingConstants.LEFT);
+		
+		username = new JTextField();
+		username.setBounds(10, 52, 174, 30);
+		loginPanel.add(username);
+		username.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPassword.setBounds(10, 83, 174, 14);
+		loginPanel.add(lblPassword);
+		
+		password = new JPasswordField();
+		password.setBounds(10, 100, 174, 30);
+		password.setEchoChar('X');
+		loginPanel.add(password);
+		password.setColumns(10);
+		
+		JButton loginButton = new JButton("Login");
+		loginButton.setAction(action);
+		loginButton.setBounds(10, 141, 174, 30);
+		loginPanel.add(loginButton);
+		this.setVisible(true);
+	}
+	
+	public JFrame getFrame(){
+		return this;
+	}
+	
+	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction() {
+			putValue(NAME, "Login");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			Main.makeConnection();
+			try{
+				Main.preparedStatement = Main.connection.prepareStatement("SELECT USERNAME, PASSWORD FROM LOGIN WHERE USERNAME = ? AND PASSWORD = ?");
+				Main.preparedStatement.setString(1,username.getText());
+				Main.preparedStatement.setString(2, password.getText());
+				Main.result = Main.preparedStatement.executeQuery();
+				if(Main.result.next()){
+					getFrame().dispose();
+					new Main();
+				}
+				else if(username.getText().isEmpty() || password.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "Fields cannot be empty!","Value Empty!",JOptionPane.WARNING_MESSAGE);
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Incorrect Username or Password!","Login Failure!",JOptionPane.WARNING_MESSAGE);
+				}
+			}catch(SQLException error){
+				JOptionPane.showMessageDialog(null, error ,"Error!",JOptionPane.WARNING_MESSAGE);
+			}
+		}
+	}
+}
+
+

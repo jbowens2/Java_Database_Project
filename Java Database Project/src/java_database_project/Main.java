@@ -1,6 +1,8 @@
 package java_database_project;
 
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,12 +11,14 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 import com.mysql.jdbc.Statement;
 
 public class Main extends JFrame{
 	private static final long serialVersionUID = 1L;
 	public static Connection connection;
 	public static Statement statement;
+	public static boolean isValidated = false;
 	public static java.sql.PreparedStatement preparedStatement;
 	public static ResultSet result;
 	public Main (){
@@ -28,10 +32,8 @@ public class Main extends JFrame{
 		frame.getContentPane().add(tabbedPanel);
 		frame.setTitle("Girl's Scout Cookie Tracking System");
 		frame.setSize(new Dimension(800,800));
-		frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		frame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		frame.setResizable(false);
-		//frame.setJMenuBar(new MenuBar());
-		
 		if(System.getProperty("os.name").startsWith("Mac OS X")){
 			System.setProperty("apple.laf.useScreenMenuBar", "true");
 			System.setProperty("apple.awt.graphics.UseQuartz", "true");
@@ -40,6 +42,17 @@ public class Main extends JFrame{
 		else{
 			frame.setJMenuBar(new MenuBar());
 		}
+		
+		this.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent event){
+                int confirmed = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit? This will close all associated windows.", "Confirm", JOptionPane.YES_NO_OPTION);
+                if(confirmed == JOptionPane.YES_OPTION){
+                    System.exit(1);
+                }
+            }
+        });
+		
 		frame.setVisible(true);
 	}
 	

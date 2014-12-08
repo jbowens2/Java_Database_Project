@@ -36,12 +36,15 @@ public class EditScout extends JFrame{
 	private JTextField city;
 	private JTextField zipcode;
 	
+	@SuppressWarnings("rawtypes")
 	private static JComboBox state_combo;
+	@SuppressWarnings("rawtypes")
 	private static JComboBox Troop_Combo;
 	private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public EditScout(){
 		//custom variables
 		this.setTitle("Edit Scout Information");
@@ -205,6 +208,7 @@ public class EditScout extends JFrame{
 		zipcode.setText(TabbedPanel.temp_scout_zipcode);	
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void populateTroop(JComboBox combo){
 		try{
 			Main.makeConnection();

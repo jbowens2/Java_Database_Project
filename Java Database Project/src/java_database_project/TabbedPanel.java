@@ -18,6 +18,7 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -279,6 +280,7 @@ public class TabbedPanel extends JTabbedPane{
 		loadData();	
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void populateManager(JComboBox combo){
 		try{
 			Main.makeConnection();

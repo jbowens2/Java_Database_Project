@@ -4,7 +4,7 @@ public class GSCookie {
 
 	public static void main(String[] args) {
 	    System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Girls' Scout Cookie Tracking System");
-		new Main();
+		new Login();
 	}
 
 }

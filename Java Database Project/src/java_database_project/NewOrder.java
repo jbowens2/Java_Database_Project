@@ -31,9 +31,11 @@ public class NewOrder extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
+	@SuppressWarnings("rawtypes")
 	private JComboBox scout_combo, customer_combo, product_combo;
 	private JTextField quantity;
 
+	@SuppressWarnings("rawtypes")
 	public NewOrder(){
 		//custom variables
 		this.setTitle("New Order Information");
@@ -117,6 +119,7 @@ public class NewOrder extends JFrame{
 		this.setVisible(true);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void populateScout(JComboBox combo){
 		try{
 			Main.makeConnection();
@@ -132,6 +135,7 @@ public class NewOrder extends JFrame{
 		}
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void populateCustomer(JComboBox combo){
 		try{
 			Main.makeConnection();
@@ -147,6 +151,7 @@ public class NewOrder extends JFrame{
 		}
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void populateProduct(JComboBox combo){
 		try{
 			Main.makeConnection();

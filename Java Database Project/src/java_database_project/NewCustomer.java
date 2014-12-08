@@ -29,10 +29,12 @@ public class NewCustomer extends JFrame{
 	private JTextField lastname;
 	private JTextField phone;
 	private JTextField email;
+	@SuppressWarnings("rawtypes")
 	private JComboBox Scout_Combo;
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 
+	@SuppressWarnings("rawtypes")
 	public NewCustomer(){
 		//custom variables
 		this.setTitle("New Customer Information");
@@ -109,6 +111,7 @@ public class NewCustomer extends JFrame{
 		this.setVisible(true);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void populateTroop(JComboBox combo){
 		try{
 			Main.makeConnection();

@@ -29,7 +29,7 @@ public class MenuBar extends JMenuBar{
 		JMenu file = new JMenu("File");
 		//JMenu edit = new JMenu("Edit");
 		JMenu query = new JMenu("Query");
-		JMenu report = new JMenu("Report");
+		//JMenu report = new JMenu("Report");
 		JMenu statistics = new JMenu("Statistics");
 		JMenu about = new JMenu("About");
 		JMenu help = new JMenu("Help");
@@ -87,7 +87,7 @@ public class MenuBar extends JMenuBar{
 		this.add(about);
 		this.add(file);
 		this.add(query);
-		this.add(report);
+		//this.add(report);
 		this.add(statistics);
 		this.add(help);
 		

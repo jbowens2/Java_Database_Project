@@ -26,6 +26,10 @@ import javax.swing.Action;
 
 
 
+
+
+
+
 import net.proteanit.sql.DbUtils;
 
 public class EditTroop extends JFrame{
@@ -38,13 +42,16 @@ public class EditTroop extends JFrame{
 	private JTextField city;
 	private JTextField zipcode;
 	
+	@SuppressWarnings("rawtypes")
 	private static JComboBox state_combo;
+	@SuppressWarnings("rawtypes")
 	private static JComboBox manager;
 	//private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private JTextField name;
 
+	@SuppressWarnings("rawtypes")
 	public EditTroop(){
 		//custom variables
 		this.setTitle("Edit Troop Information");
@@ -132,6 +139,7 @@ public class EditTroop extends JFrame{
 		setData();
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void populateManager(JComboBox combo){
 		try{
 			Main.makeConnection();

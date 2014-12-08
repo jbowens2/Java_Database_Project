@@ -1,0 +1,14 @@
+package java_database_project;
+
+import javax.swing.JPanel;
+
+public class Login extends JPanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}
+
+

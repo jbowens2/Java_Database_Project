@@ -25,6 +25,10 @@ import javax.swing.Action;
 
 
 
+
+
+
+
 import net.proteanit.sql.DbUtils;
 
 public class NewTroop extends JFrame{
@@ -37,13 +41,16 @@ public class NewTroop extends JFrame{
 	private JTextField city;
 	private JTextField zipcode;
 	
+	@SuppressWarnings("rawtypes")
 	private static JComboBox state_combo;
+	@SuppressWarnings("rawtypes")
 	private static JComboBox manager;
 	private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 	private JTextField name;
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public NewTroop(){
 		//custom variables
 		this.setTitle("New Troop Information");
@@ -129,6 +136,7 @@ public class NewTroop extends JFrame{
 		this.setVisible(true);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void populateManager(JComboBox combo){
 		try{
 			Main.makeConnection();

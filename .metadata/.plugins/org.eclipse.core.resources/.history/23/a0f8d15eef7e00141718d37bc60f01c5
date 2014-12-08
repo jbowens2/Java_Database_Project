@@ -1,0 +1,38 @@
+package java_database_project;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+
+public class Login extends JFrame{
+	private static final long serialVersionUID = 1L;
+	private JTextField textField;
+	public Login() {
+		this.setTitle("Login");
+		this.setSize(new Dimension(400,200));
+		this.setResizable(false);
+		getContentPane().setLayout(null);
+		
+		JPanel loginPanel = new JPanel();
+		loginPanel.setBounds(0, 0, 400, 4);
+		getContentPane().add(loginPanel);
+		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUsername.setBounds(109, 44, 63, 14);
+		getContentPane().add(lblUsername);
+		
+		textField = new JTextField();
+		textField.setBounds(114, 130, 242, 20);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		this.setVisible(true);
+		
+	}
+}
+
+

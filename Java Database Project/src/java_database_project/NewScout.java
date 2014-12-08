@@ -36,12 +36,15 @@ public class NewScout extends JFrame{
 	private JTextField city;
 	private JTextField zipcode;
 	
+	@SuppressWarnings("rawtypes")
 	private static JComboBox state_combo;
+	@SuppressWarnings("rawtypes")
 	private static JComboBox Troop_Combo;
 	private String[] states = { "MD","DC" };
 	private final Action action = new SwingAction();
 	private final Action action_1 = new SwingAction_1();
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public NewScout(){
 		//custom variables
 		this.setTitle("New Scout Information");
@@ -188,6 +191,7 @@ public class NewScout extends JFrame{
 		this.setVisible(true);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void populateTroop(JComboBox combo){
 		try{
 			Main.makeConnection();
