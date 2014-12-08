@@ -1,0 +1,32 @@
+package java_database_project;
+
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+
+public class About extends JFrame{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public About(){
+		this.setTitle("About");
+		this.setSize(new Dimension(400,400));
+		this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setVisible(true);
+		getContentPane().setLayout(null);
+		
+		JTextArea aboutText = new JTextArea();
+		aboutText.setBounds(6, 6, 388, 366);
+		getContentPane().add(aboutText);
+		
+		aboutText.setEditable(false);
+		String projectDescription_and_credits = "";
+		aboutText.setText(projectDescription_and_credits);
+		
+	}
+}

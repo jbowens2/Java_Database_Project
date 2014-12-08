@@ -51,7 +51,7 @@ public class TabbedPanel extends JTabbedPane{
 	public TabbedPanel (){
 		addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				//loadData();
+				loadData();
 			}
 		});	
 		setSize(800, 800);
@@ -310,7 +310,6 @@ public class TabbedPanel extends JTabbedPane{
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.volunteer_table.setModel(DbUtils.resultSetToTableModel(Main.result));
 			
-			//Main.preparedStatement = Main.connection.prepareStatement("SELECT NAME, ADDRESS, CITY, STATE, ZIPCODE, MANAGER, FIRSTNAME, LASTNAME FROM TROOP, VOLUNTEER WHERE TROOP.MANAGER = VOLUNTEER.VOLUNTEER_ID");
 			Main.preparedStatement = Main.connection.prepareStatement("SELECT * FROM TROOP");
 			Main.result = Main.preparedStatement.executeQuery();
 			TabbedPanel.troop_table.setModel(DbUtils.resultSetToTableModel(Main.result));
@@ -339,7 +338,9 @@ public class TabbedPanel extends JTabbedPane{
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, e ,"Please make sure you have a connection to your database!",JOptionPane.WARNING_MESSAGE);
 		}catch(Exception general){
-			JOptionPane.showMessageDialog(null, general ,"Error!",JOptionPane.WARNING_MESSAGE);
+			//JOptionPane.showMessageDialog(null, general ,"Error!",JOptionPane.WARNING_MESSAGE);
+			
+			//System.out.println(general);
 		}
 		
 	}

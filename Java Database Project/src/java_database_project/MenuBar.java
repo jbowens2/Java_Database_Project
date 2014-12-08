@@ -22,6 +22,8 @@ public class MenuBar extends JMenuBar{
 	private final Action action_6 = new SwingAction_6();
 	private final Action action_7 = new SwingAction_7();
 	private final Action action_8 = new SwingAction_8();
+	private final Action action_9 = new SwingAction_9();
+	private final Action action_10 = new SwingAction_10();
 	
 	public MenuBar(){
 		JMenu file = new JMenu("File");
@@ -36,6 +38,12 @@ public class MenuBar extends JMenuBar{
 		JMenu New = new JMenu("New");
 		//JMenu Delete = new JMenu("Delete");
 		//JMenu Alter = new JMenu("Alter");
+		
+		//about menu item
+		
+		JMenuItem aboutMenu = new JMenuItem("About");
+		aboutMenu.setAction(action_10);
+		about.add(aboutMenu);
 		
 		//new sub category
 		JMenuItem newScout = new JMenuItem("Scout");
@@ -70,9 +78,12 @@ public class MenuBar extends JMenuBar{
 		allStatistics.setAction(action_7);
 		statistics.add(allStatistics);
 		
-		JMenuItem loadQuery = new JMenuItem("New Query");
-		loadQuery.setAction(action_3);
-		query.add(loadQuery);
+		JMenuItem loadDDL = new JMenuItem("DDL Query");
+		JMenuItem loadDML = new JMenuItem("DML Query");
+		loadDML.setAction(action_9);
+		loadDDL.setAction(action_3);
+		query.add(loadDDL);
+		query.add(loadDML);
 		this.add(about);
 		this.add(file);
 		this.add(query);
@@ -128,11 +139,11 @@ public class MenuBar extends JMenuBar{
 		 */
 		private static final long serialVersionUID = 1L;
 		public SwingAction_3() {
-			putValue(NAME, "New Query");
+			putValue(NAME, "DDL Query");
 			//putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
-			new QueryWindow();
+			new DDLQueryWindow();
 		}
 	}
 	private class SwingAction_4 extends AbstractAction {
@@ -198,6 +209,32 @@ public class MenuBar extends JMenuBar{
 		}
 		public void actionPerformed(ActionEvent e) {
 			new Help();
+		}
+	}
+	private class SwingAction_9 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_9() {
+			putValue(NAME, "DML Query");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new DMLQueryWindow();
+		}
+	}
+	private class SwingAction_10 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_10() {
+			putValue(NAME, "Credits");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new About();
 		}
 	}
 }

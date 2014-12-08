@@ -1,0 +1,240 @@
+package java_database_project;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
+
+public class MenuBar extends JMenuBar{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final Action action = new SwingAction();
+	private final Action action_1 = new SwingAction_1();
+	private final Action action_2 = new SwingAction_2();
+	private final Action action_3 = new SwingAction_3();
+	private final Action action_4 = new SwingAction_4();
+	private final Action action_5 = new SwingAction_5();
+	private final Action action_6 = new SwingAction_6();
+	private final Action action_7 = new SwingAction_7();
+	private final Action action_8 = new SwingAction_8();
+	private final Action action_9 = new SwingAction_9();
+	private final Action action_10 = new SwingAction_10();
+	
+	public MenuBar(){
+		JMenu file = new JMenu("File");
+		//JMenu edit = new JMenu("Edit");
+		JMenu query = new JMenu("Query");
+		JMenu report = new JMenu("Report");
+		JMenu statistics = new JMenu("Statistics");
+		JMenu about = new JMenu("About");
+		JMenu help = new JMenu("Help");
+		
+		//new menu
+		JMenu New = new JMenu("New");
+		//JMenu Delete = new JMenu("Delete");
+		//JMenu Alter = new JMenu("Alter");
+		
+		//about menu item
+		
+		JMenuItem aboutMenu = new JMenuItem("About");
+		aboutMenu.setAction(action_10);
+		about.add(aboutMenu);
+		
+		//new sub category
+		JMenuItem newScout = new JMenuItem("Scout");
+		newScout.setAction(action);
+		JMenuItem newTroop = new JMenuItem("Troop");
+		newTroop.setAction(action_2);
+		JMenuItem newProduct = new JMenuItem("Product");
+		newProduct.setAction(action_4);
+		JMenuItem newVolunteer = new JMenuItem("Volunteer");
+		newVolunteer.setAction(action_1);
+		JMenuItem newCustomer = new JMenuItem("Customer");
+		newCustomer.setAction(action_5);
+		//JMenuItem newShipment = new JMenuItem("Shipment");
+		JMenuItem newOrder = new JMenuItem("Order");
+		newOrder.setAction(action_6);
+		New.add(newScout);
+		New.add(newTroop);
+		New.add(newProduct);
+		New.add(newVolunteer);
+		New.add(newCustomer);
+		//New.add(newShipment);
+		New.add(newOrder);
+		file.add(New);
+		
+		//
+		
+		JMenuItem tutorial = new JMenuItem("Tutorial");
+		tutorial.setAction(action_8);
+		help.add(tutorial);
+		
+		JMenuItem allStatistics = new JMenuItem("All Statistics");
+		allStatistics.setAction(action_7);
+		statistics.add(allStatistics);
+		
+		JMenuItem loadDDL = new JMenuItem("DDL Query");
+		JMenuItem loadDML = new JMenuItem("DML Query");
+		loadDML.setAction(action_9);
+		loadDDL.setAction(action_3);
+		query.add(loadDDL);
+		query.add(loadDML);
+		this.add(about);
+		this.add(file);
+		this.add(query);
+		this.add(report);
+		this.add(statistics);
+		this.add(help);
+		
+	}
+
+	private class SwingAction extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction() {
+			putValue(NAME, "Scout");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewScout();
+		}
+	}
+	private class SwingAction_1 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_1() {
+			putValue(NAME, "Volunteer");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewVolunteer();
+		}
+	}
+	private class SwingAction_2 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_2() {
+			putValue(NAME, "Troop");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewTroop();
+		}
+	}
+	
+	private class SwingAction_3 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_3() {
+			putValue(NAME, "DDL Query");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new DDLQueryWindow();
+		}
+	}
+	private class SwingAction_4 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_4() {
+			putValue(NAME, "Product");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewProduct();
+		}
+	}
+	private class SwingAction_5 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_5() {
+			putValue(NAME, "Customer");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewCustomer();
+		}
+	}
+	private class SwingAction_6 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_6() {
+			putValue(NAME, "Order");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new NewOrder();
+		}
+	}
+	private class SwingAction_7 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_7() {
+			putValue(NAME, "All Statistics");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new StatsWindow();
+		}
+	}
+	private class SwingAction_8 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_8() {
+			putValue(NAME, "Tutorial");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new Help();
+		}
+	}
+	private class SwingAction_9 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_9() {
+			putValue(NAME, "DML Query");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new DMLQueryWindow();
+		}
+	}
+	private class SwingAction_10 extends AbstractAction {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public SwingAction_10() {
+			putValue(NAME, "Credits and Project Description");
+			//putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			new About();
+		}
+	}
+}
